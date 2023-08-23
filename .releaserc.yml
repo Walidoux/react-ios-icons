@@ -1,0 +1,6 @@
+plugins:
+  - '@semantic-release/npm'
+  - '@semantic-release/github'
+
+branches:
+  - release

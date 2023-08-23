@@ -1,0 +1,67 @@
+{
+  "name": "react-ios-icons",
+  "description": "✧ A React Component Library which allows you to import with ease iOS icons with high-level custom props and types",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "prettier": "@walidoux/prettier-config",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "release": "semantic-release",
+    "generate": "plop",
+    "lint:typescript": "tsc --noemit",
+    "lint:eslint": "eslint ./src --max-warnings 0 --report-unused-disable-directives",
+    "lint:prettier": "prettier \".\" --check --ignore-unknown '!**/*.hbs' --ignore-path \".gitignore\""
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@semantic-release/npm": "10.0.5",
+    "@semantic-release/github": "9.0.4",
+    "@walidoux/prettier-config": "1.0.3",
+    "@walidoux/eslint-config": "1.0.9",
+    "clsx": "2.0.0",
+    "eslint": "8.47.0",
+    "plop": "^3.1.2",
+    "prettier": "^3.0.2",
+    "semantic-release": "^21.0.9",
+    "tsup": "7.2.0",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Walidoux/react-ios-icons"
+  },
+  "homepage": "https://github.com/Walidoux/react-ios-icons/#readme",
+  "author": {
+    "name": "Walid Korchi",
+    "url": "https://walidkorchi.com/"
+  },
+  "keywords": [
+    "react",
+    "icons",
+    "apple",
+    "ios",
+    "typescript",
+    "jsx"
+  ],
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8.6.12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  }
+}

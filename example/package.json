@@ -1,0 +1,23 @@
+{
+  "name": "example",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-ios-icons": "file:../"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.4",
+    "autoprefixer": "^10.4.15",
+    "tailwindcss": "3.3.3",
+    "postcss": "8.4.28",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9"
+  }
+}

@@ -1,0 +1,42 @@
+name: Lint
+
+on:
+  push:
+    branches: [dev, release]
+  pull_request:
+    branches: [dev, release]
+
+jobs:
+  lint:
+    name: Lint on latest Node
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code 🛎️
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Setup node and Cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Tsc > Type checking
+        run: yarn lint:typescript
+
+      - name: Prettier > Formatting
+        run: yarn lint:prettier
+
+      - name: Eslint > Analyzing
+        run: yarn lint:eslint
