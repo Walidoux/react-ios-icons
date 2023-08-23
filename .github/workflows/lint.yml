@@ -33,10 +33,10 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Tsc > Type checking
-        run: yarn lint:typescript
+        run: pnpm lint:typescript
 
       - name: Prettier > Formatting
-        run: yarn lint:prettier
+        run: pnpm lint:prettier
 
       - name: Eslint > Analyzing
-        run: yarn lint:eslint
+        run: pnpm lint:eslint
