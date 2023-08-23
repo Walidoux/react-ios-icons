@@ -14,7 +14,7 @@
     "generate": "plop",
     "lint:typescript": "tsc --noemit",
     "lint:eslint": "eslint ./src --max-warnings 0 --report-unused-disable-directives",
-    "lint:prettier": "prettier \".\" --check --ignore-unknown '!**/*.hbs' --ignore-path \".gitignore\""
+    "lint:prettier": "prettier \".\" --check --ignore-unknown '!**/pnpm-lock.yaml' '!**/*.hbs' --ignore-path \".gitignore\""
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
