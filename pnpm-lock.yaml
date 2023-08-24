@@ -13,12 +13,15 @@ dependencies:
     version: 18.2.0(react@18.2.0)
 
 devDependencies:
-  '@semantic-release/changelog':
-    specifier: ^6.0.3
-    version: 6.0.3(semantic-release@21.0.9)
   '@semantic-release/git':
-    specifier: ^10.0.1
+    specifier: 10.0.1
     version: 10.0.1(semantic-release@21.0.9)
+  '@semantic-release/github':
+    specifier: 9.0.4
+    version: 9.0.4(semantic-release@21.0.9)
+  '@semantic-release/npm':
+    specifier: 10.0.5
+    version: 10.0.5(semantic-release@21.0.9)
   '@types/react':
     specifier: ^18.2.21
     version: 18.2.21
@@ -525,19 +528,6 @@ packages:
       '@pnpm/config.env-replace': 1.1.0
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
-    dev: true
-
-  /@semantic-release/changelog@6.0.3(semantic-release@21.0.9):
-    resolution: {integrity: sha512-dZuR5qByyfe3Y03TpmCvAxCyTnp7r5XwtHRf/8vD9EAn4ZWbavUX8adMtXYzE86EVh0gyLA7lm5yW4IV30XUag==}
-    engines: {node: '>=14.17'}
-    peerDependencies:
-      semantic-release: '>=18.0.0'
-    dependencies:
-      '@semantic-release/error': 3.0.0
-      aggregate-error: 3.1.0
-      fs-extra: 11.1.1
-      lodash: 4.17.21
-      semantic-release: 21.0.9
     dev: true
 
   /@semantic-release/commit-analyzer@10.0.1(semantic-release@21.0.9):

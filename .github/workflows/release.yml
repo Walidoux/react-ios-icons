@@ -31,7 +31,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Release library
-        run: pnpm release
+        run: npx semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
