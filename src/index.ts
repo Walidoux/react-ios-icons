@@ -1,5 +1,6 @@
 /// DO NOT REMOVE THE LINE DOWN BELOW
 /// @PLOP_EXPORTS
+export { Brain } from './icons/Brain'
 export { BubbleChat } from './icons/BubbleChat'
 export { Apple } from './icons/Apple'
 export { Battery } from './icons/Battery'
