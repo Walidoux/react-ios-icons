@@ -1,5 +1,6 @@
 /// DO NOT REMOVE THE LINE DOWN BELOW
 /// @PLOP_EXPORTS
+export { Shoe } from './icons/Shoe'
 export { LightBulb } from './icons/LightBulb'
 export { Brain } from './icons/Brain'
 export { BubbleChat } from './icons/BubbleChat'
