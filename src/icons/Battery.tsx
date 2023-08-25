@@ -1,7 +1,11 @@
 import React from 'react'
 
+import type { IconProps, Range } from '../IconProps'
 import { Icon } from '../Icon'
-import type { BatteryProps, IconProps } from '../IconProps'
+
+interface BatteryProps {
+  progression?: Range<101>
+}
 
 export const Battery: IconProps<BatteryProps> = ({ progression = 100, ...rest }) => (
   <Icon {...rest}>

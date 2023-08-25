@@ -1,9 +1,13 @@
 import React from 'react'
 
+import type { FilledProp, IconProps } from '../IconProps'
 import { Icon } from '../Icon'
-import type { GearProps, IconProps } from '../IconProps'
 
-export const Gear: IconProps<GearProps, true> = ({ filled = false, hasDouble = false, ...rest }) => (
+interface GearProps extends FilledProp {
+  hasDouble?: boolean
+}
+
+export const Gear: IconProps<GearProps> = ({ filled = false, hasDouble = false, ...rest }) => (
   <Icon {...rest}>
     {!hasDouble && (
       <path

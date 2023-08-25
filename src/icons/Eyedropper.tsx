@@ -1,7 +1,11 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { EyedropperProps, IconProps } from '../IconProps'
+import type { IconProps } from '../IconProps'
+
+interface EyedropperProps {
+  fillLevel?: 'half' | 'full' | 'empty'
+}
 
 export const Eyedropper: IconProps<EyedropperProps> = ({ fillLevel = 'full', ...rest }) => (
   <Icon {...rest}>

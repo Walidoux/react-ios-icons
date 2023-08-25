@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { IconProps } from '../IconProps'
+import type { FilledProp, IconProps } from '../IconProps'
 
-export const Send: IconProps<unknown, true> = ({ filled = false, ...rest }) => (
+export const Send: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path
       fill='currentColor'

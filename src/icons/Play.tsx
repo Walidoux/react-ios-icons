@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { DisableProp, IconProps } from '../IconProps'
+import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 
-export const Play: IconProps<DisableProp, true> = ({ disabled = false, filled = false, ...rest }) => (
+export const Play: IconProps<DisableProp & FilledProp> = ({ disabled = false, filled = false, ...rest }) => (
   <Icon {...rest}>
     {!disabled && (
       <path

@@ -1,9 +1,13 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { IconProps, SpeakerProps } from '../IconProps'
+import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 
-export const Speaker: IconProps<SpeakerProps, true> = ({
+interface SpeakerProps extends DisableProp, FilledProp {
+  pitch?: 'high' | 'normal' | 'low' | 'idle'
+}
+
+export const Speaker: IconProps<SpeakerProps & FilledProp> = ({
   pitch = 'idle',
   disabled = false,
   filled = false,

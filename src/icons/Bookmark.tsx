@@ -1,9 +1,9 @@
 import React from 'react'
 
+import type { FilledProp, IconProps } from '../IconProps'
 import { Icon } from '../Icon'
-import type { IconProps } from '../IconProps'
 
-export const Bookmark: IconProps<unknown, true> = ({ filled = false, ...rest }) => (
+export const Bookmark: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path
       fill='currentColor'

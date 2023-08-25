@@ -1,11 +1,15 @@
 import React from 'react'
-import classNames from 'clsx'
+import clsx from 'clsx'
 
 import { Icon } from '../Icon'
-import type { IconProps, PhoneProps } from '../IconProps'
+import type { FilledProp, IconProps } from '../IconProps'
 
-export const Phone: IconProps<PhoneProps, true> = ({ className, isPutDown = false, filled = false, ...rest }) => (
-  <Icon {...rest} className={classNames(className, { 'rotate-[135deg]': isPutDown })}>
+interface PhoneProps extends FilledProp {
+  isPutDown?: boolean
+}
+
+export const Phone: IconProps<PhoneProps> = ({ isPutDown = false, filled = false, ...rest }) => (
+  <Icon {...rest} style={{ rotate: clsx({ '135deg': isPutDown }) }}>
     <path
       fill='currentColor'
       d={`M18.2627 22.4258C19.8008 22.4258 20.8467 21.9863 21.7959 20.958C21.8574 20.8877 21.9189 20.8086 21.9805 20.7383C22.499 20.1582 22.7539 19.5517 22.7539 18.9892C22.7539 18.3301 22.4023 17.7324 21.6201 17.1963L19.001 15.3681C18.1748 14.7969 17.2168 14.7529 16.4785 15.4912L15.8281 16.1416C15.5996 16.3701 15.3799 16.3877 15.1162 16.2031C14.6416 15.8867 13.7451 15.0957 13.1299 14.4804C12.5059 13.8564 11.873 13.1533 11.5303 12.6172C11.3457 12.3447 11.3633 12.1338 11.5918 11.9052L12.2422 11.2549C12.9805 10.5166 12.9365 9.55857 12.3564 8.7324L10.4932 6.06931C9.97461 5.31345 9.35059 4.96189 8.69141 4.9531C8.12891 4.94431 7.53125 5.19919 6.95117 5.70896C6.88086 5.77048 6.81055 5.83201 6.74023 5.89353C5.69434 6.85154 5.24609 7.87986 5.24609 9.47947C5.24609 12.0722 6.74902 15.1308 9.67578 18.04C12.585 20.9316 15.6084 22.4258 18.2627 22.4258Z ${

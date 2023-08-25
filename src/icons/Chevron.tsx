@@ -2,7 +2,11 @@ import React from 'react'
 import classNames from 'clsx'
 
 import { Icon } from '../Icon'
-import type { ChevronProps, IconProps } from '../IconProps'
+import type { IconProps } from '../IconProps'
+
+interface ChevronProps {
+  direction?: 'up' | 'down' | 'left' | 'right'
+}
 
 export const Chevron: IconProps<ChevronProps> = ({ className, direction = 'up', ...rest }) => (
   <Icon

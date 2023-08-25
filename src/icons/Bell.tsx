@@ -1,14 +1,13 @@
 import React from 'react'
 
+import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 import { Icon } from '../Icon'
-import type { BellProps, IconProps } from '../IconProps'
 
-export const Bell: IconProps<BellProps, true> = ({
-  filled = false,
-  hasNotification = false,
-  disabled = false,
-  ...rest
-}) => (
+interface BellProps extends FilledProp, DisableProp {
+  hasNotification?: boolean
+}
+
+export const Bell: IconProps<BellProps> = ({ filled = false, hasNotification = false, disabled = false, ...rest }) => (
   <Icon {...rest}>
     {!hasNotification && !disabled && (
       <path

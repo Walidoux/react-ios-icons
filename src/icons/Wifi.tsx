@@ -1,7 +1,11 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { IconProps, WifiProps } from '../IconProps'
+import type { IconProps } from '../IconProps'
+
+interface WifiProps {
+  internet?: 'noWifi' | 'fast' | 'normal' | 'slow'
+}
 
 export const Wifi: IconProps<WifiProps> = ({ internet = 'fast', ...rest }) => (
   <Icon {...rest}>

@@ -1,7 +1,11 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { CellularProps, IconProps } from '../IconProps'
+import type { IconProps } from '../IconProps'
+
+interface CellularProps {
+  network?: 'noNetwork' | 'verySlow' | 'slow' | 'normal' | 'fast'
+}
 
 export const Cellular: IconProps<CellularProps> = ({ network = 'fast', ...rest }) => (
   <Icon {...rest}>

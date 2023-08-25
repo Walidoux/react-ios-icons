@@ -1,7 +1,11 @@
 import React from 'react'
 
+import type { IconProps } from '../IconProps'
 import { Icon } from '../Icon'
-import type { FlashLightProps, IconProps } from '../IconProps'
+
+interface FlashLightProps {
+  isOn?: boolean
+}
 
 export const Flashlight: IconProps<FlashLightProps> = ({ isOn = false, ...rest }) => (
   <Icon {...rest}>
