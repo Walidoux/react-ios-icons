@@ -1,8 +1,8 @@
-import { Play } from 'react-ios-icons'
+import { Trash } from '../../src/icons/Trash'
 
 const Example = () => (
   <main className='flex min-h-screen w-screen items-center justify-center gap-4'>
-    <Play />
+    <Trash />
   </main>
 )
 
