@@ -1,6 +1,6 @@
 {
   "name": "react-ios-icons",
-  "description": "✧ A React Component Library which allows you to import with ease iOS icons with high-level custom props and types",
+  "description": "🐢 A React Component Library of iOS icons with high-level props & types",
   "version": "0.0.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "generate": "plop",
+    "generate:icon": "plop",
     "lint:typescript": "tsc --noemit",
     "lint:eslint": "eslint ./src --max-warnings 0 --report-unused-disable-directives",
     "lint:prettier": "prettier \".\" --check --ignore-unknown '!**/pnpm-lock.yaml' '!**/*.hbs' --ignore-path \".gitignore\""
@@ -25,7 +25,9 @@
     "@walidoux/eslint-config": "1.0.9",
     "clsx": "2.0.0",
     "eslint": "8.47.0",
-    "plop": "^3.1.2",
+    "chalk": "4.1.2",
+    "plop": "3.1.2",
+    "handlebars-helpers": "0.10.0",
     "prettier": "^3.0.2",
     "semantic-release": "^21.0.9",
     "tsup": "7.2.0",
@@ -63,5 +65,15 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public",
     "tag": "latest"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "branches": [
+      "release"
+    ]
   }
 }
