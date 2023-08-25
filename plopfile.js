@@ -34,7 +34,7 @@ module.exports = (
       {
         type: 'confirm',
         name: 'hasFilledProp',
-        message: `Will this icon hace the ${chalk.blue('filled')} prop?`
+        message: `Will this icon have the ${chalk.blue('filled')} prop?`
       },
       {
         type: 'confirm',
