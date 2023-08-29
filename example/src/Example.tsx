@@ -1,8 +1,8 @@
-import { Shareplay } from '../../src/icons/Shareplay'
+import { Video } from '../../src/icons/Video'
 
 const Example = () => (
   <main className='flex min-h-screen w-screen items-center justify-center gap-4'>
-    <Shareplay />
+    <Video disabled badge='checkmark' />
   </main>
 )
 
