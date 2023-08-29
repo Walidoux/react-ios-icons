@@ -1,70 +1,68 @@
+const path = require('node:path')
+const fs = require('node:fs')
+
+const chalk = require('chalk')
+const helpers = require('handlebars-helpers')()
+
+const iconsList = fs
+  .readdirSync(path.join(__dirname, 'src/icons'))
+  .map((item) => item.substring(0, item.lastIndexOf('.')) || item)
+
 module.exports = (
   /** @type {import('plop').NodePlopAPI} */
   plop
-) =>
+) => {
+  for (const prop in helpers) {
+    if (!prop.toLowerCase().includes('case')) {
+      plop.setHelper(prop, helpers[prop])
+    }
+  }
+
   plop.setGenerator('icon', {
-    description: 'Generate an icon',
+    description: '📦 generate a new Icon',
     prompts: [
       {
         type: 'input',
         name: 'name',
-        message: "What's the icon's name ?"
+        message: 'What would you like to call your icon?',
+        validate: (icon) => {
+          if (icon === '') return chalk.red('⛔ Icon name cannot be empty')
+          else if (iconsList.includes(icon)) return chalk.red('⛔ Already exists')
+          else return true
+        }
       },
       {
         type: 'confirm',
         name: 'hasFilledProp',
-        message: 'Does this icon require the [filled] prop ?'
+        message: `Will this icon have the ${chalk.blue('filled')} prop?`
+      },
+      {
+        type: 'confirm',
+        name: 'hasDisableProp',
+        message: `Will this icon have the ${chalk.yellowBright('disabled')} prop?`
       },
       {
         type: 'confirm',
         name: 'hasCustomProps',
-        message: 'Are you willing to give him custom props ?'
+        message: `Will it have other ${chalk.greenBright('custom')} props?`
       }
     ],
-    actions: (data) => {
+    actions() {
       const currentActions = [
         {
           type: 'add',
           path: 'src/icons/{{ properCase name }}.tsx',
-          templateFile: data.hasFilledProp
-            ? data.hasCustomProps
-              ? 'generators/FilledIconProps.tsx.hbs'
-              : 'generators/FilledIcon.tsx.hbs'
-            : data.hasCustomProps
-            ? 'generators/IconProps.tsx.hbs'
-            : 'generators/Icon.tsx.hbs'
+          templateFile: 'generators/Icon.tsx.hbs'
         },
         {
           type: 'append',
           path: 'src/index.ts',
-          pattern: /(\/{3} @GENERATORS: COMPONENT EXPORTS)/g,
-          template: "export * from './icons/{{ properCase name }}'"
-        },
-        {
-          type: 'append',
-          path: 'src/index.d.ts',
-          pattern: /(\/{3} @GENERATORS: COMPONENT EXPORTS)/g,
-          template: `export const {{ properCase name }}: IconProps${
-            data.hasFilledProp ? `<${data.hasCustomProps ? '{{ properCase name }}Props' : 'unknown'}, true>` : ''
-          }`
+          pattern: /(\/{3} @PLOP_EXPORTS)/g,
+          template: "export { {{ properCase name }} } from './icons/{{ properCase name }}'"
         }
       ]
-
-      if (data.hasCustomProps)
-        currentActions.push(
-          {
-            type: 'append',
-            path: 'src/IconProps.ts',
-            template: 'export interface {{ properCase name }}Props { defaultProp: unknown }'
-          },
-          {
-            type: 'append',
-            path: 'src/index.d.ts',
-            pattern: /(\/{3} @GENERATORS: COMPONENT IMPORTS)/g,
-            template: '{{ properCase name }}Props,'
-          }
-        )
 
       return currentActions
     }
   })
+}

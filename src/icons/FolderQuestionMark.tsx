@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Icon } from '../Icon'
-import type { IconProps } from '../IconProps'
+import type { FilledProp, IconProps } from '../IconProps'
 
-export const FolderQuestionMark: IconProps<unknown, true> = ({ filled = false, ...rest }) => (
+export const FolderQuestionMark: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path
       fill='currentColor'

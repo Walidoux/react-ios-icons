@@ -1,6 +1,17 @@
-import { Icon } from '../Icon'
-import type { IconProps } from '../IconProps'
+{{! Prettier is disabled, see: https://github.com/prettier/prettier/issues/5340 }}
+{{! DO NOT MODIFY THIS FILE UNLESS YOU KNOW WHAT YOU'RE DOING}}
 
-export const {{ properCase name }}: IconProps = ({ className, ...rest }) => (
-  <Icon className={className} {...rest}></Icon>
+import { Icon } from '../Icon'
+import type { {{#if hasFilledProp}}FilledProp, {{/if}}{{#if hasDisableProp}}DisableProp, {{/if}}IconProps } from '../IconProps'
+
+{{#if hasCustomProps}}
+interface {{ properCase name }}Props {{#if hasFilledProp}}extends FilledProp{{/if}}{{#if hasDisableProp}}, DisableProp {{/if}}{
+  dummyProp: unknown // type to be changed 👀
+}
+{{/if}}
+
+export const {{ properCase name }}: IconProps{{#if (or hasCustomProps hasFilledProp hasDisableProp)}}<{{#if hasCustomProps}}{{ properCase name }}Props{{/if}}{{#if hasFilledProp}} & FilledProp{{/if}}{{#if hasDisableProp}} & DisableProp{{/if}}>{{/if}} = ({ {{#if hasCustomProps}}dummyProp = 'defaultValue',{{/if}}{{#if hasFilledProp}} filled = false,{{/if}}{{#if hasDisableProp}} disabled = false, {{/if}}...rest }) => (
+  <Icon {...rest}>
+    <path fill='currentColor' />
+  </Icon>
 )
