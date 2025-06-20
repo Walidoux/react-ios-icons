@@ -6,7 +6,7 @@ import type { {{#if hasFilledProp}}FilledProp, {{/if}}{{#if hasDisableProp}}Disa
 
 {{#if hasCustomProps}}
 interface {{ properCase name }}Props {{#if hasFilledProp}}extends FilledProp{{/if}}{{#if hasDisableProp}}, DisableProp {{/if}}{
-  dummyProp: unknown // type to be changed 👀
+  dummyProp: unknown
 }
 {{/if}}
 

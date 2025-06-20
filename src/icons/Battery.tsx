@@ -1,5 +1,3 @@
-import React from 'react'
-
 import type { IconProps, Range } from '../IconProps'
 import { Icon } from '../Icon'
 

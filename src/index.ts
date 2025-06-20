@@ -1,5 +1,18 @@
 /// DO NOT REMOVE THE LINE DOWN BELOW
 /// @PLOP_EXPORTS
+export { Airpods } from './icons/Airpods'
+export { Airpod } from './icons/Airpod'
+export { Globe } from './icons/Globe'
+export { LadyBug } from './icons/LadyBug'
+export { Leaf } from './icons/Leaf'
+export { Ant } from './icons/Ant'
+export { Tortoise } from './icons/Tortoise'
+export { Hare } from './icons/Hare'
+export { Bolt } from './icons/Bolt'
+export { Drop } from './icons/Drop'
+export { Flame } from './icons/Flame'
+export { Hands } from './icons/Hands'
+export { Hand } from './icons/Hand'
 export { Shoe } from './icons/Shoe'
 export { LightBulb } from './icons/LightBulb'
 export { Brain } from './icons/Brain'

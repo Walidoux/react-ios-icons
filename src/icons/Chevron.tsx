@@ -1,4 +1,3 @@
-import React from 'react'
 import classNames from 'clsx'
 
 import { Icon } from '../Icon'

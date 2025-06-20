@@ -1,12 +1,22 @@
 {
-  "extends": ["@walidoux/eslint-config"],
+  "extends": ["conventions", "prettier"],
+  "plugins": ["prettier"],
 
   "parser": "@typescript-eslint/parser",
+
+  "env": { "node": false, "browser": true },
 
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2023,
     "project": ["./tsconfig.json"]
+  },
+
+  "rules": {
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "@typescript-eslint/no-extraneous-class": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
 
   "ignorePatterns": ["dist"]

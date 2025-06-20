@@ -1,5 +1,3 @@
-import React from 'react'
-
 import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 import { Icon } from '../Icon'
 

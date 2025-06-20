@@ -45,7 +45,6 @@ If you would like to contribute and improve our project, we've set certain rules
 
 In order to create an icon, you need to generate one by executing:
 
-> NPM : `npm run generate <ComponentName>` \
-> YARN : `yarn generate <ComponentName>`
+> `npm run generate:icon <ComponentName>`
 
 2 questions will be asked to you which helps giving instructions that will be provide a start code for your icon.
