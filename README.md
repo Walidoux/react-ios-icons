@@ -1,6 +1,6 @@
 # 🐢 Getting started
 
-![Preview background library](https://images-ext-1.discordapp.net/external/5FmI3faZKSbqTgCAbZyMCBkV7HqecTtWENJZxE7xC5w/https/repository-images.githubusercontent.com/524621830/67536f3d-3efe-4c39-95f5-74a8cba31af0?width=1178&height=662)
+![Preview background library](https://repository-images.githubusercontent.com/682106596/d365cb8c-1ca1-442d-a959-be2b5126e931)
 
 ## Table of Content
 
