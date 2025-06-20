@@ -18,25 +18,19 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          version: latest
-
-      - name: Setup node and Cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: latest
-          cache: 'pnpm'
+          bun-version: latest
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: bun install
 
       - name: Tsc > Type checking
-        run: pnpm lint:typescript
+        run: bun run lint:typescript
 
       - name: Prettier > Formatting
-        run: pnpm lint:prettier
+        run: bun run lint:prettier
 
       - name: Eslint > Analyzing
-        run: pnpm lint:eslint
+        run: bun run lint:eslint
