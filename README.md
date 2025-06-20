@@ -25,7 +25,7 @@ Depdending on your package manager, here are two examples:
 ```tsx
 import { Battery } from 'react-ios-icons'
 
-// Renders the one-fifth of battery's capacity
+// Fills three-fourths of the battery's capacity
 export const DummyComponent: React.FC = () => {
   return <Battery progression={75} />
 }
@@ -34,7 +34,11 @@ export const DummyComponent: React.FC = () => {
 #### Example 2
 
 ```tsx
-import {} from 'react-ios-icons'
+import { Bolt } from 'react-ios-icons'
+
+export const DummyComponent: React.FC = () => {
+  return <Bolt filled disabled circled />
+}
 ```
 
 ## Contributing
@@ -47,4 +51,4 @@ In order to create an icon, you need to generate one by executing:
 
 > `npm run generate:icon <ComponentName>`
 
-2 questions will be asked to you which helps giving instructions that will be provide a start code for your icon.
+You will be prompted with a few questions to help generate starter code for your icon.
