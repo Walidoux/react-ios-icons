@@ -1,8 +1,8 @@
-import { Airpods } from '../../src/icons/Airpods'
+import { Hand } from '../../src/icons/Hand'
 
 const Example = () => (
   <main className='flex min-h-screen w-screen items-center justify-center gap-4'>
-    <Airpods />
+    <Hand type='wave' />
   </main>
 )
 
