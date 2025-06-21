@@ -45,6 +45,10 @@ export const DummyComponent: React.FC = () => {
 
 If you would like to contribute and improve our project, we've set certain rules to maintain a better scoial and development environment, almost everything is mentioned in the [CONTRIBUTING.md](./CONTRIBUTING.md) file.
 
+## Roadmap
+
+- [ ] docs: display the number of icons as a progress bar towards a target goal
+
 ### Where do I start?
 
 In order to create an icon, you need to generate one by executing:

@@ -13,6 +13,7 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "alwaysStrict": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -23,5 +24,5 @@
     "strictFunctionTypes": true
   },
 
-  "exclude": ["node_modules", "dist", "example"]
+  "exclude": ["node_modules", "dist"]
 }

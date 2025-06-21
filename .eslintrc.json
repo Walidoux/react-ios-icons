@@ -19,5 +19,5 @@
     "@typescript-eslint/explicit-function-return-type": "off"
   },
 
-  "ignorePatterns": ["dist"]
+  "ignorePatterns": ["dist", "src/index.ts"]
 }

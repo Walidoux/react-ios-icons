@@ -1,8 +1,8 @@
-import { Hand } from '../../src/icons/Hand'
+import { Hands } from '../../src/icons/Hands'
 
 const Example = () => (
   <main className='flex min-h-screen w-screen items-center justify-center gap-4'>
-    <Hand type='wave' />
+    <Hands type='sparkles' />
   </main>
 )
 
