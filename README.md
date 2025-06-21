@@ -2,25 +2,17 @@
 
 ![Preview background library](https://repository-images.githubusercontent.com/682106596/d365cb8c-1ca1-442d-a959-be2b5126e931)
 
-## Table of Content
+## ✨ Features
 
-- [Setup](#setup)
-- [Contributing](#contributing)
-  - [Where do I start?](#where-do-i-start)
-  - [Code Of Conduct](./CODE_OF_CONDUCT.md)
+- Supports <!-- ICON_COUNT -->54 out of 6,000 icons
 
-## Setup
+## 🚀 Quick Start
 
-### Install the dependency
+Depdending on your package manager (we use [bun](https://bun.sh)), install the package :
 
-Depdending on your package manager, here are two examples:
+> `bun install react-ios-icons`
 
-> NPM : `npm install react-ios-icons` \
-> YARN : `yarn add react-ios-icons`
-
-### Import an icon
-
-#### Example 1
+And the icon into your code like that :
 
 ```tsx
 import { Battery } from 'react-ios-icons'
@@ -31,28 +23,19 @@ export const DummyComponent: React.FC = () => {
 }
 ```
 
-#### Example 2
-
-```tsx
-import { Bolt } from 'react-ios-icons'
-
-export const DummyComponent: React.FC = () => {
-  return <Bolt filled disabled circled />
-}
-```
-
-## Contributing
+## 🌱 Contributing
 
 If you would like to contribute and improve our project, we've set certain rules to maintain a better scoial and development environment, almost everything is mentioned in the [CONTRIBUTING.md](./CONTRIBUTING.md) file.
-
-## Roadmap
-
-- [ ] docs: display the number of icons as a progress bar towards a target goal
 
 ### Where do I start?
 
 In order to create an icon, you need to generate one by executing:
 
-> `npm run generate:icon <ComponentName>`
+> `bun run generate:icon <component_name>`
 
 You will be prompted with a few questions to help generate starter code for your icon.
+
+## 📍 Roadmap
+
+- [x] docs : display the number of icons as a progress bar towards a target goal
+- [ ] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)
