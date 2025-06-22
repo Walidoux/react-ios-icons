@@ -44,3 +44,4 @@ You will be prompted with a few questions to help generate starter code for your
 - [ ] docs : add themed doc with basic search bar
 - [x] example : add editor mode to dynamically adjust path attribute value
 - [ ] docs : infer icon count variants from tsx files
+- [ ] example : draw symetrical alignements lines for x/y axis inside contraints

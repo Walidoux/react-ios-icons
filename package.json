@@ -11,8 +11,9 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "generate:icon": "plop",
-    "docs:uic": "node --no-warnings --loader ts-node/esm scripts/UIC.ts",
-    "audit": "node --no-warnings --loader ts-node/esm scripts/audit.ts",
+    "scripts:uic": "node --no-warnings --loader ts-node/esm scripts/UIC.ts",
+    "scripts:audit": "node --no-warnings --loader ts-node/esm scripts/audit.ts",
+    "scripts:sync": "ncp example docs --filter=\"node_modules\" --stopOnErr",
     "lint:typescript": "tsc --noemit",
     "lint:eslint": "eslint ./src --max-warnings 0 --report-unused-disable-directives",
     "lint:prettier": "prettier . --check",
@@ -30,6 +31,7 @@
     "clsx": "2.0.0",
     "eslint": "8.47.0",
     "handlebars-helpers": "0.10.0",
+    "ncp": "^2.0.0",
     "plop": "3.1.2",
     "prettier": "^3.0.2",
     "semantic-release": "^21.0.9",
@@ -49,7 +51,7 @@
     "type": "git",
     "url": "https://github.com/Walidoux/react-ios-icons"
   },
-  "homepage": "https://github.com/Walidoux/react-ios-icons/#readme",
+  "homepage": "https://walidoux.github.io/react-ios-icons",
   "author": {
     "name": "Walidoux",
     "url": "https://walidkorchi.com/"
