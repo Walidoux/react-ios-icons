@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: |
           cd docs
-          bun run install
+          bun install
           bun run build
 
       - name: Upload artifact
