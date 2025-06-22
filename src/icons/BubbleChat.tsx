@@ -15,12 +15,7 @@ type BubbleChatProps = {
 
 /**
  * getPathPosition icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/BubbleChat.tsx
-/**
- * getPathPosition icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/BubbleChat.tsx
- */
-
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/BubbleChat.ts
  */
 export const BubbleChat: IconProps<BubbleChatProps & FilledProp> = ({ filled = false, className, ...props }) => {
   const getPathPosition = () => {

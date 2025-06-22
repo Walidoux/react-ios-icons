@@ -15,47 +15,13 @@ type HandProps =
   | { type: 'point'; direction?: keyof typeof Direction; braille?: boolean }
   | { type: 'thumbsup'; flipped?: boolean }
 
-/**
- * Hand Icon with 26 variants
- *
- * @component
- */
 export const Hand: IconProps<HandProps & FilledProp & DisableProp> = ({
   type = 'raised',
   filled = false,
   disabled = false,
   ...rest
 }) => {
-  
-/**
- * { direction: d,
-/**
- * { direction: d,
-/**
- * { direction: d, braille: b, ...other } i
-/**
- * { direction: d, braille: b, ...other } icon
- * @s
-/**
- * { direction: d, braille: b, ...other } icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
- */
-/**
- * { direction: d, braille: b, ...other } icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
- */
-ee https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
- */
-con
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
- */
- braille: b, ...other } icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
- */
- braille: b, ...other } icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
- */
-let flipped = false
+  let flipped = false
   let braille = false
   let direction: keyof typeof Direction = 'UP'
   let iconRest = rest

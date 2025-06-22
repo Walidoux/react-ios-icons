@@ -178,7 +178,8 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
       } else if (componentName != null) {
         const jsDoc = generateJSDoc(componentName, propsInfo, docLink, expectedPattern)
         const startPos = node.getStart(sourceFile)
-        const needsNewline = modifiedCode.slice(Math.max(0, startPos - 1), startPos) !== '\n'
+        const prevChar = modifiedCode.slice(Math.max(0, startPos - 1), startPos)
+        const needsNewline = !['\n', '\r', undefined].includes(prevChar)
 
         modifiedCode =
           modifiedCode.slice(0, startPos) + (needsNewline ? '\n' : '') + jsDoc + '\n' + modifiedCode.slice(startPos)
