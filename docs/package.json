@@ -6,7 +6,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "bun run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
