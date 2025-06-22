@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
 
+/**
+ * XMarkCircle icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/XMarkCircle.tsx
+ */
 export const XMarkCircle: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
     <path

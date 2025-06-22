@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 
+/**
+ * Play icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Play.tsx
+ */
 export const Play: IconProps<DisableProp & FilledProp> = ({ disabled = false, filled = false, ...rest }) => (
   <Icon {...rest}>
     {!disabled && (

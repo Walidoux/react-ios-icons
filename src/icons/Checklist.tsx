@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
 
+/**
+ * Checklist icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Checklist.tsx
+ */
 export const Checklist: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
     <path

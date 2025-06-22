@@ -5,6 +5,11 @@ interface FlashLightProps {
   isOn?: boolean
 }
 
+/**
+ * Flashlight icon
+ * @param {boolean} [props.isOn] - isOn description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Flashlight.tsx
+ */
 export const Flashlight: IconProps<FlashLightProps> = ({ isOn = false, ...rest }) => (
   <Icon {...rest}>
     <path

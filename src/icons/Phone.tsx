@@ -7,6 +7,11 @@ interface PhoneProps extends FilledProp {
   isPutDown?: boolean
 }
 
+/**
+ * Phone icon
+ * @param {boolean} [props.isPutDown] - isPutDown description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Phone.tsx
+ */
 export const Phone: IconProps<PhoneProps> = ({ isPutDown = false, filled = false, ...rest }) => (
   <Icon {...rest} style={{ rotate: clsx({ '135deg': isPutDown }) }}>
     <path

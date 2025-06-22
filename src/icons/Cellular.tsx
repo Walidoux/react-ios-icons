@@ -5,6 +5,11 @@ interface CellularProps {
   network?: 'noNetwork' | 'verySlow' | 'slow' | 'normal' | 'fast'
 }
 
+/**
+ * Cellular icon
+ * @param {'noNetwork' | 'verySlow' | 'slow' | 'normal' | 'fast'} [props.network] - network description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Cellular.tsx
+ */
 export const Cellular: IconProps<CellularProps> = ({ network = 'fast', ...rest }) => (
   <Icon {...rest}>
     <path

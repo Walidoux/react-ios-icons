@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
+/**
+ * LightBulb icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/LightBulb.tsx
+ */
 export const LightBulb: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path

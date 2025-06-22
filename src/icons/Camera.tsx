@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
+/**
+ * Camera icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Camera.tsx
+ */
 export const Camera: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path

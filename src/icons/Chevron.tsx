@@ -7,6 +7,11 @@ interface ChevronProps {
   direction?: 'up' | 'down' | 'left' | 'right'
 }
 
+/**
+ * Chevron icon
+ * @param {'up' | 'down' | 'left' | 'right'} [props.direction] - direction description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Chevron.tsx
+ */
 export const Chevron: IconProps<ChevronProps> = ({ className, direction = 'up', ...rest }) => (
   <Icon
     {...rest}

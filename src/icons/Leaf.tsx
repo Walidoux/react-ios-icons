@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
+/**
+ * Leaf icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Leaf.tsx
+ */
 export const Leaf: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path

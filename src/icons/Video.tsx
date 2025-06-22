@@ -19,7 +19,57 @@ type VideoProps = FilledProp &
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
  */
 export const Video: IconProps<VideoProps> = ({ filled = false, ...rest }) => {
-  let circled = false
+  
+/**
+ * { iconType: i, 
+/**
+ * { iconType: i, 
+/**
+ * { iconType: i, .
+/**
+ * { iconType: i, ...
+/**
+ * { iconType: i, ...other } icon
+ * @see https://github.com
+/**
+ * { iconType: i, ...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+/Walidoux
+/**
+ * { iconType: i, ...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+/react-ios
+/**
+ * { iconType: i, ...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+-icons/blob/re
+/**
+ * { iconType: i, ...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+lease/src/icons/Video.tsx
+ */
+/**
+ * { iconType: i, ...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+
+other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+..other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
+ */
+let circled = false
   let squared = false
   let disabled = false
   let withBadge = 'plus'

@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
+/**
+ * Flag icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Flag.tsx
+ */
 export const Flag: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>
     <path

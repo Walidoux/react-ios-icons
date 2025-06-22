@@ -5,6 +5,11 @@ interface SpeakerProps extends DisableProp, FilledProp {
   pitch?: 'high' | 'normal' | 'low'
 }
 
+/**
+ * Speaker icon
+ * @param {'high' | 'normal' | 'low'} [props.pitch] - pitch description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Speaker.tsx
+ */
 export const Speaker: IconProps<SpeakerProps & FilledProp> = ({ pitch, disabled = false, filled = false, ...rest }) => (
   <Icon {...rest}>
     {pitch == null && !disabled && (

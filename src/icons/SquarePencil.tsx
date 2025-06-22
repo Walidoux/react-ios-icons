@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
 
+/**
+ * SquarePencil icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/SquarePencil.tsx
+ */
 export const SquarePencil: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
     <path

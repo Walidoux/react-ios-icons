@@ -5,6 +5,11 @@ interface EyedropperProps {
   fillLevel?: 'half' | 'full' | 'empty'
 }
 
+/**
+ * Eyedropper icon
+ * @param {'half' | 'full' | 'empty'} [props.fillLevel] - fillLevel description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Eyedropper.tsx
+ */
 export const Eyedropper: IconProps<EyedropperProps> = ({ fillLevel = 'empty', ...rest }) => (
   <Icon {...rest}>
     <path

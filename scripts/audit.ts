@@ -1,13 +1,14 @@
 /**
  * Audit: Perform checks (jsdoc, props, doclink) using Typescript AST parser
  * and automatically add missing JSDoc documentation to icon components.
- * @module iconAuditor
+ * @module Audit
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
 import { createRequire } from 'node:module'
 
+import chalk from 'chalk'
 import ts from 'typescript'
 
 import { ICONS_DIR } from './index.js'
@@ -177,7 +178,11 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
       } else if (componentName != null) {
         const jsDoc = generateJSDoc(componentName, propsInfo, docLink, expectedPattern)
         const startPos = node.getStart(sourceFile)
-        modifiedCode = `${modifiedCode.slice(0, startPos)}\n${jsDoc}\n${modifiedCode.slice(startPos)}`
+        const needsNewline = modifiedCode.slice(Math.max(0, startPos - 1), startPos) !== '\n'
+
+        modifiedCode =
+          modifiedCode.slice(0, startPos) + (needsNewline ? '\n' : '') + jsDoc + '\n' + modifiedCode.slice(startPos)
+
         changesMade = true
         hasJSDoc = true
         hasDocLink = true
@@ -200,12 +205,15 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
   return { hasJSDoc, hasProps, hasDocLink, changesMade }
 }
 
-for (const icon of ['XMark.tsx']) {
+for (const icon of fs.readdirSync(ICONS_DIR)) {
   const iconPath = path.join(ICONS_DIR, icon)
   const result = auditAndFixIconFile(iconPath)
 
-  console.log(`${icon}:`, {
-    ...result,
-    status: result.changesMade ? 'Fixed' : 'OK'
-  })
+  const status = result.changesMade ? chalk.bgGreen.black(' FIXED ') : chalk.bgGreenBright.black(' OK ')
+
+  const jsdoc = result.hasJSDoc ? chalk.green('JSDoc✓') : chalk.gray('JSDoc✗')
+  const props = result.hasProps ? chalk.green('Props✓') : chalk.gray('Props✗')
+  const doclink = result.hasDocLink ? chalk.green('DocLink✓') : chalk.gray('DocLink✗')
+
+  console.log(`${chalk.cyan(icon.padEnd(24))} ${status} ${jsdoc} ${props} ${doclink}`)
 }

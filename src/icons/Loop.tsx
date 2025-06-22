@@ -1,6 +1,10 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
 
+/**
+ * Loop icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Loop.tsx
+ */
 export const Loop: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
     <path

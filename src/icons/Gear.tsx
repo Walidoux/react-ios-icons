@@ -5,6 +5,11 @@ interface GearProps extends FilledProp {
   hasDouble?: boolean
 }
 
+/**
+ * Gear icon
+ * @param {boolean} [props.hasDouble] - hasDouble description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Gear.tsx
+ */
 export const Gear: IconProps<GearProps> = ({ filled = false, hasDouble = false, ...rest }) => (
   <Icon {...rest}>
     {!hasDouble ? (

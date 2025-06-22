@@ -5,6 +5,11 @@ interface ShoeProps extends FilledProp {
   double?: boolean
 }
 
+/**
+ * Shoe icon
+ * @param {boolean} [props.double] - double description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Shoe.tsx
+ */
 export const Shoe: IconProps<ShoeProps & FilledProp> = ({ double = false, filled = false, ...rest }) => (
   <Icon {...rest}>
     {!double ? (
