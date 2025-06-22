@@ -1,8 +1,8 @@
-import { Microphone } from '../../src/icons/Microphone'
+import { BubbleChat } from '../../src/icons/BubbleChat'
 
 const Example = () => (
   <main className='flex min-h-screen w-screen items-center justify-center gap-4'>
-    <Microphone />
+    <BubbleChat />
   </main>
 )
 
