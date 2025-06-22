@@ -1,13 +1,11 @@
-// Update Icon Count : Script to count icon variants from JSDoc comments and update markdown
+/** Update Icon Count : Script to count icon variants from JSDoc comments and update markdown */
 
 import fs from 'node:fs'
 import path from 'node:path'
 
 import chalk from 'chalk'
 
-const ICONS_DIR = path.join(process.cwd(), 'src', 'icons')
-const README_PATH = path.join(process.cwd(), 'README.md')
-const PLACEHOLDER = '<!-- ICON_COUNT -->'
+import { ICONS_DIR, PLACEHOLDER_ICON_COUNT, README_PATH } from './index.js'
 
 const extractVariantCount = (content: string): number => {
   const match = content.match(/icon with (\d+) variants/i)
@@ -27,11 +25,11 @@ const getTotalVariants = (): number => {
 }
 
 const updateReadme = (total: number): void => {
-  const regex = new RegExp(`${PLACEHOLDER}(\\s*\\d+)?`)
+  const regex = new RegExp(`${PLACEHOLDER_ICON_COUNT}(\\s*\\d+)?`)
   let readme = fs.readFileSync(README_PATH, 'utf8')
 
   if (regex.test(readme)) {
-    readme = readme.replace(regex, `${PLACEHOLDER}${total}`)
+    readme = readme.replace(regex, `${PLACEHOLDER_ICON_COUNT}${total}`)
   } else {
     console.error(chalk.red('Error : Placeholder not found or unrecognized'))
     process.exit(1)

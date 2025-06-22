@@ -12,6 +12,7 @@
     "build": "tsup",
     "generate:icon": "plop",
     "docs:uic": "node --no-warnings --loader ts-node/esm scripts/UIC.ts",
+    "audit": "node --no-warnings --loader ts-node/esm scripts/audit.ts",
     "lint:typescript": "tsc --noemit",
     "lint:eslint": "eslint ./src --max-warnings 0 --report-unused-disable-directives",
     "lint:prettier": "prettier . --check"
