@@ -14,7 +14,6 @@ const IconConstraints: React.FC<PropsWithChildren> = ({ children }) => (
 export default () => {
   const { containerRef, svgPaths, updatePathD, onPathMouseDown } = useNode<HTMLDivElement>()
 
-  // Store original path data for reset
   const originalDsRef = useRef<string[] | null>(null)
 
   useEffect(() => {
@@ -23,7 +22,6 @@ export default () => {
     }
   }, [svgPaths])
 
-  // Attach mouseDown to each path
   useEffect((): void => {
     if (!svgPaths) return
     svgPaths.forEach((info, idx) => {
@@ -32,10 +30,18 @@ export default () => {
     })
   }, [svgPaths, onPathMouseDown])
 
-  // Reset handler
   const handleReset = () => {
     if (!svgPaths || !originalDsRef.current) return
     originalDsRef.current.forEach((d, idx) => updatePathD(idx, d))
+  }
+
+  function minifyPath(d: string): string {
+    return d
+      .replace(/\s+/g, ' ')
+      .replace(/ ?([,\-]) ?/g, '$1')
+      .replace(/([a-zA-Z]) /g, '$1')
+      .replace(/ ([a-zA-Z])/g, '$1')
+      .trim()
   }
 
   return (
@@ -55,8 +61,8 @@ export default () => {
               <div key={idx}>
                 <div className='text-xs mb-1'>Path {idx + 1}:</div>
                 <textarea
-                  value={info.d}
-                  onChange={(e) => updatePathD(idx, e.target.value)}
+                  value={minifyPath(info.d)}
+                  onChange={(e): void => updatePathD(idx, e.target.value)}
                   rows={2}
                   className='w-80 border p-1'
                 />
