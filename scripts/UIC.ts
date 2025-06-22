@@ -1,4 +1,4 @@
-// Script to count icon variants from JSDoc comments and update README.md
+// Update Icon Count : Script to count icon variants from JSDoc comments and update markdown
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -11,7 +11,7 @@ const PLACEHOLDER = '<!-- ICON_COUNT -->'
 
 const extractVariantCount = (content: string): number => {
   const match = content.match(/icon with (\d+) variants/i)
-  return match != null ? Number.parseInt(match[1] as string, 10) : 0
+  return match != null ? Number.parseInt(match[1] as string, 10) : 1 // fallback to 1 if no match found meaning icon has no variants
 }
 
 const getTotalVariants = (): number => {

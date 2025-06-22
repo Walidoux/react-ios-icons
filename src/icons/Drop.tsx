@@ -2,10 +2,10 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 interface DropProps extends FilledProp {
-  type?: 'normal' | 'triangle'
+  type?: 'default' | 'triangle'
 }
 
-export const Drop: IconProps<DropProps> = ({ type = 'normal', filled = false, ...rest }) => (
+export const Drop: IconProps<DropProps> = ({ type = 'default', filled = false, ...rest }) => (
   <Icon {...rest}>
     {type === 'triangle' ? (
       <path

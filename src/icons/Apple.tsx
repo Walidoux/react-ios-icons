@@ -1,6 +1,7 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
 
+/** Apple icon */
 export const Apple: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
     <path

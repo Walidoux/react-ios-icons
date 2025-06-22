@@ -10,7 +10,11 @@ export const AirpodLeftPath =
 export const AirpodRightPath =
   'M16.404 7C13.46 6.981 10 9.917 10 12.731c0 2.328 2.337 4.216 4.263 4.207 2.665-.01 6.264-3.076 6.264-5.628 0-2.459-1.898-4.3-4.123-4.31Zm-.411 4.385c-.3-.42-.206-1 .215-1.3l1.309-.944a.909.909 0 0 1 1.28.224.903.903 0 0 1-.196 1.3l-1.3.925c-.439.309-1.018.225-1.308-.205Zm-2.6 4.179c-.532 0-1.355-.664-1.86-1.505-.514-.832-.486-1.496.047-1.496.514 0 1.346.663 1.851 1.496.505.841.486 1.505-.037 1.505Zm3.479 8.096h1.15c.645 0 1.065-.355 1.065-.982v-6.88c-.972.86-2.131 1.542-3.3 1.879v5.001c0 .627.43.982 1.085.982Z'
 
-export const Airpod: IconProps<AirpodProps> = ({ direction = 'let', ...rest }) => (
+/**
+ * Airpod icon with 2 variants
+ * @param {Direction} [direction] - Direction of the Airpod icon (left or right)
+ */
+export const Airpod: IconProps<AirpodProps> = ({ direction = 'left', ...rest }) => (
   <Icon {...rest}>
     <path d={direction === 'left' ? AirpodLeftPath : AirpodRightPath} fill='currentColor' />
   </Icon>

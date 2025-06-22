@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- Supports <!-- ICON_COUNT -->54 out of 6,000 icons
+- Supports <!-- ICON_COUNT -->109 out of 6,000 icons
 
 ## 🚀 Quick Start
 

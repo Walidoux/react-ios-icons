@@ -2,7 +2,7 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 interface PaintBrushProps extends FilledProp {
-  type: 'normal' | 'pointed'
+  type: 'default' | 'pointed'
 }
 
 /**
@@ -10,7 +10,7 @@ interface PaintBrushProps extends FilledProp {
  *
  * @component
  */
-export const PaintBrush: IconProps<PaintBrushProps> = ({ type = 'normal', filled = false, ...rest }) => (
+export const PaintBrush: IconProps<PaintBrushProps> = ({ type = 'default', filled = false, ...rest }) => (
   <Icon {...rest}>
     {type === 'pointed' ? (
       <path
