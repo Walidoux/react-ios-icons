@@ -15,7 +15,8 @@
     "audit": "node --no-warnings --loader ts-node/esm scripts/audit.ts",
     "lint:typescript": "tsc --noemit",
     "lint:eslint": "eslint ./src --max-warnings 0 --report-unused-disable-directives",
-    "lint:prettier": "prettier . --check"
+    "lint:prettier": "prettier . --check",
+    "format": "prettier . --write"
   },
   "devDependencies": {
     "@semantic-release/git": "10.0.1",
