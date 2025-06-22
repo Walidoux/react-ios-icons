@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build --outDir ./dist",
+    "build": "vite build",
     "preview": "vite preview",
     "predeploy": "bun run build",
     "deploy": "gh-pages -d build"
