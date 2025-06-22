@@ -1,6 +1,6 @@
 import { useEffect, useRef, type PropsWithChildren } from 'react'
 
-import { Airpods } from '../../src/icons/Airpods'
+import { Bookmark } from '../../src/icons/Bookmark'
 import { useNode } from './useNode'
 
 const IconConstraints: React.FC<PropsWithChildren> = ({ children }) => (
@@ -46,7 +46,7 @@ export default () => {
         Reset Path Positions
       </button>
       <IconConstraints>
-        <Airpods />
+        <Bookmark />
       </IconConstraints>
       {svgPaths && (
         <div className='p-2 rounded shadow space-y-2'>

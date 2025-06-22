@@ -61,57 +61,60 @@ export function useNode<T extends HTMLElement>() {
       const svgPixelHeight = svgRect.height
       const svgViewWidth = viewBox && viewBox.width ? viewBox.width : svgElem.width.baseVal.value
       const svgViewHeight = viewBox && viewBox.height ? viewBox.height : svgElem.height.baseVal.value
-
-      // Store initial path data and mouse position
-      const origD = pathElem.getAttribute('d') || ''
-      // Extract first M x y (move to) command for simplicity
-      const match = origD.match(/M\s*([-\d.]+)[ ,]([-\d.]+)/i)
-      if (!match) return
-      const origX = parseFloat(match[1])
-      const origY = parseFloat(match[2])
+      const origD = pathElem.getAttribute('d')!
 
       const onMouseMove = (e: MouseEvent) => {
-        // Calculate pixel delta
+        // pixel delta
         const dxPx = e.clientX - dragStartXRef.current!
         const dyPx = e.clientY - dragStartY
 
-        // Convert pixel delta to viewBox units
+        // converts pixel delta to viewBox units
         const dx = (dxPx / svgPixelWidth) * svgViewWidth
         const dy = (dyPx / svgPixelHeight) * svgViewHeight
 
-        // Parse all coordinates and update them
-        // This regex matches command letters or numbers (including decimals and negatives)
+        // command letters or numbers
         const tokens = origD.match(/[a-zA-Z]|-?\d*\.?\d+/g)
         if (!tokens) return
 
-        let isCoord = false
+        let currentCommand = ''
         let coordIdx = 0
         const updatedTokens = tokens.map((token) => {
           if (/^[a-zA-Z]$/.test(token)) {
-            // If it's a command, reset coordinate index
-            // For commands that take coordinates, set isCoord = true
-            // M, L, T, S, Q, C, A, etc.
-            if ('MLTQCS'.includes(token)) {
-              isCoord = true
-              coordIdx = 0
-            } else if (token === 'Z' || token === 'z') {
-              isCoord = false
-            } else {
-              isCoord = false
-            }
-            return token
-          } else if (isCoord) {
-            // Even index: x, Odd index: y
-            const num = parseFloat(token)
-            const updated = coordIdx % 2 === 0 ? num + dx : num + dy
-            coordIdx++
-            return updated
-          } else {
+            currentCommand = token
+            coordIdx = 0
             return token
           }
+
+          // only update coordinates for commands that use x/y pairs which are (M, L, T, S, Q, C)
+          // V: only y, H: only x, A: rx ry x-axis-rotation large-arc-flag sweep-flag x y
+          if ('MLTQCS'.includes(currentCommand)) {
+            const num = parseFloat(token)
+            const updated = coordIdx % 2 === 0 ? num + dx : num + dy
+
+            coordIdx++
+
+            return updated
+          } else if (currentCommand === 'H') {
+            return parseFloat(token) + dx // Only x
+          } else if (currentCommand === 'V') {
+            return parseFloat(token) + dy // Only y
+          } else if (currentCommand === 'A') {
+            // Arc: rx ry x-axis-rotation large-arc-flag sweep-flag x y
+            // Only update last two numbers (x, y)
+            const num = parseFloat(token)
+
+            // coordIdx: 0=rx, 1=ry, 2=x-axis-rotation, 3=large-arc-flag, 4=sweep-flag, 5=x, 6=y
+            let updated = num
+
+            if (coordIdx === 5) updated = num + dx
+            if (coordIdx === 6) updated = num + dy
+
+            coordIdx = (coordIdx + 1) % 7
+
+            return updated
+          } else return token // for Z or unknown just return as is
         })
 
-        // Reconstruct path string
         const newD = updatedTokens.join(' ')
         updatePathD(idx, newD)
       }
