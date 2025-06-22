@@ -8,14 +8,7 @@ interface IconWrapperProps {
 }
 
 export const Icon: IconProps<IconWrapperProps> = ({ children, ...rest }) => (
-  <svg
-    {...rest}
-    style={{ border: '0.5px solid #ff000050' }}
-    width='30'
-    height='30'
-    viewBox='0 0 30 30'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'>
+  <svg {...rest} width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
     {children}
   </svg>
 )
