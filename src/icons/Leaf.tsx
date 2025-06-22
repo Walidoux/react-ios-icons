@@ -2,7 +2,8 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 /**
- * Leaf icon
+ * Leaf icon with 2 variants
+ * @param {boolean} [props.filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Leaf.tsx
  */
 export const Leaf: IconProps<FilledProp> = ({ filled = false, ...rest }) => (

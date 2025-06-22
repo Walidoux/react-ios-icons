@@ -2,7 +2,8 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 /**
- * Send icon
+ * Send icon with 2 variants
+ * @param {boolean} [filled] - Use filled style
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Send.tsx
  */
 export const Send: IconProps<FilledProp> = ({ filled = false, ...rest }) => (

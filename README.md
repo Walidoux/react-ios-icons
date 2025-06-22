@@ -4,7 +4,8 @@
 
 ## ✨ Features
 
-- Supports <!-- ICON_COUNT -->119 out of 6,000 SF icons
+- 📥 Supports <!-- ICON_COUNT -->115 out of 6,000 SF icons
+- ✏️ **Editor Mode** — Dynamically changes position of path icons
 
 ## 🚀 Quick Start
 
@@ -41,4 +42,5 @@ You will be prompted with a few questions to help generate starter code for your
 - [x] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)
 - [ ] icons : add categories like this : `<Health.Heart filled />`
 - [ ] docs : add themed doc with basic search bar
-- [ ] example : add editor mode to dynamically adjust path attribute value
+- [x] example : add editor mode to dynamically adjust path attribute value
+- [ ] docs : infer icon count variants from tsx files
