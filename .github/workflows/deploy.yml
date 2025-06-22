@@ -28,6 +28,8 @@ jobs:
         run: |
           cd docs
           bun install
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           bun run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
