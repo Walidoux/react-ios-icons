@@ -15,6 +15,10 @@ type HandProps =
   | { type: 'point'; direction?: keyof typeof Direction; braille?: boolean }
   | { type: 'thumbsup'; flipped?: boolean }
 
+/**
+ * { direction: d, braille: b, ...other } icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
+ */
 export const Hand: IconProps<HandProps & FilledProp & DisableProp> = ({
   type = 'raised',
   filled = false,

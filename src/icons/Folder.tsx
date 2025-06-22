@@ -5,6 +5,11 @@ interface FolderProps extends FilledProp {
   type?: 'add' | 'remove' | 'question' | 'user' | 'settings' | 'idle'
 }
 
+/**
+ * typeParams icon
+ * @param {'add' | 'remove' | 'question' | 'user' | 'settings' | 'idle'} [props.type] - type description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Folder.tsx
+ */
 export const Folder: IconProps<FolderProps> = ({ filled = false, type = 'idle', ...rest }) => {
   const typeParams = (currentType: FolderProps['type']) => {
     switch (currentType) {
