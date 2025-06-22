@@ -1,17 +1,19 @@
-const path = require('node:path')
-const fs = require('node:fs')
+import path from 'node:path'
+import fs from 'node:fs'
 
-const chalk = require('chalk')
-const helpers = require('handlebars-helpers')()
+import chalk from 'chalk'
+import hbs_helpers from 'handlebars-helpers'
 
 const iconsList = fs
-  .readdirSync(path.join(__dirname, 'src/icons'))
+  .readdirSync(path.join(process.cwd(), 'src/icons'))
   .map((item) => item.substring(0, item.lastIndexOf('.')) || item)
 
-module.exports = (
+export default (
   /** @type {import('plop').NodePlopAPI} */
   plop
 ) => {
+  const helpers = hbs_helpers()
+
   for (const prop in helpers) {
     if (!prop.toLowerCase().includes('case')) {
       plop.setHelper(prop, helpers[prop])
@@ -45,6 +47,11 @@ module.exports = (
         type: 'confirm',
         name: 'hasCustomProps',
         message: `Will it have other ${chalk.greenBright('custom')} props?`
+      },
+      {
+        type: 'number',
+        name: 'variantsCount',
+        message: 'How many variants are you expecting for this icon?'
       }
     ],
     actions() {

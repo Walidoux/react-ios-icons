@@ -1,16 +1,36 @@
 {{! Prettier is disabled, see: https://github.com/prettier/prettier/issues/5340 }}
-{{! DO NOT MODIFY THIS FILE UNLESS YOU KNOW WHAT YOU'RE DOING}}
+{{! DO NOT MODIFY THIS FILE UNLESS YOU KNOW WHAT YOU'RE DOING }}
 
 import { Icon } from '../Icon'
 import type { {{#if hasFilledProp}}FilledProp, {{/if}}{{#if hasDisableProp}}DisableProp, {{/if}}IconProps } from '../IconProps'
 
 {{#if hasCustomProps}}
-interface {{ properCase name }}Props {{#if hasFilledProp}}extends FilledProp{{/if}}{{#if hasDisableProp}}, DisableProp {{/if}}{
+interface {{ properCase name }}Props{{#if hasFilledProp}} extends FilledProp{{/if}}{{#if hasDisableProp}}{{#if hasFilledProp}},{{else}} extends{{/if}} DisableProp{{/if}} {
   dummyProp: unknown
 }
 {{/if}}
 
-export const {{ properCase name }}: IconProps{{#if (or hasCustomProps hasFilledProp hasDisableProp)}}<{{#if hasCustomProps}}{{ properCase name }}Props{{/if}}{{#if hasFilledProp}} & FilledProp{{/if}}{{#if hasDisableProp}} & DisableProp{{/if}}>{{/if}} = ({ {{#if hasCustomProps}}dummyProp = 'defaultValue',{{/if}}{{#if hasFilledProp}} filled = false,{{/if}}{{#if hasDisableProp}} disabled = false, {{/if}}...rest }) => (
+/**
+ * {{ properCase name }} icon{{#if variantsCount}}{{#unless (eq variantsCount 0) }} with {{ variantsCount }} variants{{/unless}}{{/if}}
+{{#if hasCustomProps}}
+ * @param { {{ properCase name }}Props['dummyProp'] } [dummyProp] - Displays a dummy around {{ properCase name }}
+{{/if}}
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/{{ properCase name }}.tsx
+ */
+export const {{ properCase name }}: IconProps<
+  {{#if hasCustomProps}}
+    {{ properCase name }}Props
+  {{else}}
+    {{#if hasFilledProp}}FilledProp{{/if}}
+    {{#if hasFilledProp}}{{#if hasDisableProp}} & {{/if}}{{/if}}
+    {{#if hasDisableProp}}DisableProp{{/if}}
+  {{/if}}
+> = ({
+  {{#if hasCustomProps}}dummyProp = 'defaultValue',{{/if}}
+  {{#if hasFilledProp}}filled = false,{{/if}}
+  {{#if hasDisableProp}}disabled = false,{{/if}}
+  ...rest
+}) => (
   <Icon {...rest}>
     <path fill='currentColor' />
   </Icon>

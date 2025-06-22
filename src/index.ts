@@ -1,5 +1,6 @@
 /// DO NOT REMOVE THE LINE DOWN BELOW
 /// @PLOP_EXPORTS
+export { Circle } from './icons/Circle'
 export { PaintBrush } from './icons/PaintBrush'
 export { Airpods } from './icons/Airpods'
 export { Airpod } from './icons/Airpod'

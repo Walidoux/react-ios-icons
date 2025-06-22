@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- Supports <!-- ICON_COUNT -->109 out of 6,000 icons
+- Supports <!-- ICON_COUNT -->111 out of 6,000 SF icons
 
 ## 🚀 Quick Start
 
@@ -37,5 +37,6 @@ You will be prompted with a few questions to help generate starter code for your
 
 ## 📍 Roadmap
 
-- [x] docs : display the number of icons as a progress bar towards a target goal
+- [x] docs : display the number of icons out of total of SF symbols total icons
 - [ ] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)
+- [ ] icons : add categories using nested objects
