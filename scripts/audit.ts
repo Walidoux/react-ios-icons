@@ -1,71 +1,47 @@
-/** Audit : Performs checks on icons (docs, matching props) */
+/** Audit : Perform checks (jsdoc, props, doclink) using Typescript AST parser */
 
 import fs from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
+
+import ts from 'typescript'
 
 import { ICONS_DIR } from './index.js'
-import pkg from '../package.json' assert { type: 'json' }
 
-const DEFAULT_JSDOC = (icon: string): string => `/**
- * ${icon} icon
- * @see ${pkg.repository.url}/blob/release/src/icons/${icon}
- */
-`
+const auditIconFile = (filePath: string) => {
+  const code = fs.readFileSync(filePath, 'utf8')
+  const sourceFile = ts.createSourceFile(filePath, code, ts.ScriptTarget.Latest, true)
 
-const DEFAULT_PROPS = `interface IconProps {
-  // Add your props here
-}
-`
+  let hasJSDoc = false
+  let hasProps = false
+  let hasDocLink = false
 
-const cycleThroughIcons = (): void => {
-  for (const icon of fs.readdirSync(ICONS_DIR)) {
-    const iconPath = path.join(ICONS_DIR, icon)
-    let content = fs.readFileSync(iconPath, 'utf8')
-
-    const hasJSDoc = /\/\*\*([\S\s]*?)\*\//.test(content)
-    const hasExport = /export const /i.test(content)
-    const hasProps = /interface \w+Props/.test(content)
-    const hasDocLink = /@see https?:\/\//.test(content)
-
-    let changed = false
-
-    if (!hasJSDoc) {
-      content = DEFAULT_JSDOC(icon) + content
-      changed = true
-      console.log(`${icon}: Added missing JSDoc.`)
-    } else if (!hasDocLink) {
-      content = content.replace(/(\/\*\*[\S\s]*?\*\/)/, (match): string => {
-        if (match.includes('@see ')) return match
-        return match.replace('*/', `\n * @see ${pkg.repository.url}/blob/release/src/icons/${icon}\n */`)
-      })
-      changed = true
-      console.log(`${icon}: Added missing doc link in JSDoc`)
+  const visit = (node: ts.Node) => {
+    if (ts.isFunctionDeclaration(node) || ts.isVariableStatement(node) || ts.isClassDeclaration(node)) {
+      const jsDocs = ts.getJSDocCommentsAndTags(node)
+      if (jsDocs != null && jsDocs.length > 0) {
+        hasJSDoc = true
+        const jsdocText = jsDocs.map((j) => j.getText()).join('\n')
+        if (/@see\s+https?:\/\//.test(jsdocText)) {
+          hasDocLink = true
+        }
+      }
     }
 
-    if (!hasProps) {
-      content = content.replace(/(import[^;]+;\s*)/, `$1\n${DEFAULT_PROPS}\n`)
-      changed = true
-
-      console.log(`${icon}: Added missing prop types.`)
+    if (ts.isInterfaceDeclaration(node) && /Props$/.test(node.name.text)) {
+      hasProps = true
     }
-
-    if (!hasExport) {
-      console.log(`${icon}: WARNING: export missing, cannot auto-fix`)
-    }
-
-    if (changed) {
-      fs.writeFileSync(iconPath, content, 'utf8')
-    }
+    ts.forEachChild(node, visit)
   }
 
-  try {
-    execSync('npx prettier --write "src/icons/**/*.tsx"', { stdio: 'inherit' })
-    console.log('Prettier formatting complete.')
-  } catch (error) {
-    console.error('Prettier formatting failed:', error)
-    process.exit(1)
-  }
+  visit(sourceFile)
+
+  return { hasJSDoc, hasProps, hasDocLink }
 }
 
-cycleThroughIcons()
+// Example usage for all icons:
+for (const icon of fs.readdirSync(ICONS_DIR)) {
+  if (!icon.endsWith('.tsx')) continue
+  const iconPath = path.join(ICONS_DIR, icon)
+  const result = auditIconFile(iconPath)
+  console.log(`${icon}:`, result)
+}

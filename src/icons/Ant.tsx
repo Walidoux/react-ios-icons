@@ -9,6 +9,7 @@ interface AntProps extends FilledProp {
  * Ant Icon with 4 variants
  * @param {boolean} [circled] - Show circular background.
  * @param {boolean} [filled] - Use filled style.
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Ant.tsx
  */
 export const Ant: IconProps<AntProps> = ({ filled = false, circled = false, ...rest }) => (
   <Icon {...rest}>
