@@ -25,7 +25,10 @@ jobs:
           bun-version: latest
 
       - name: Build
-        run: cd docs && bun run build
+        run: |
+          cd docs
+          bun run install
+          bun run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
