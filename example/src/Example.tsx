@@ -1,21 +1,70 @@
-import type { PropsWithChildren } from 'react'
+import { useEffect, useRef, type PropsWithChildren } from 'react'
 
-import { BubbleChat } from '../../src/icons/BubbleChat'
+import { Airpods } from '../../src/icons/Airpods'
+import { useNode } from './useNode'
 
 const IconConstraints: React.FC<PropsWithChildren> = ({ children }) => (
   <div className='relative border border-red-600/20'>
-    <div className='absolute h-2 top-0 left-0 right-0 bg-blue-500/30' />
-    <div className='absolute h-2 bottom-0 left-0 right-0 bg-blue-500/30' />
+    <div className='absolute h-2 top-0 left-0 right-0 pointer-events-none bg-blue-500/30' />
+    <div className='absolute h-2 bottom-0 left-0 right-0 pointer-events-none bg-blue-500/30' />
     {children}
   </div>
 )
 
-const Example = () => (
-  <main className='flex min-h-screen w-screen items-center justify-center gap-4'>
-    <IconConstraints>
-      <BubbleChat />
-    </IconConstraints>
-  </main>
-)
+export default () => {
+  const { containerRef, svgPaths, updatePathD, onPathMouseDown } = useNode<HTMLDivElement>()
 
-export default Example
+  // Store original path data for reset
+  const originalDsRef = useRef<string[] | null>(null)
+
+  useEffect(() => {
+    if (svgPaths && !originalDsRef.current) {
+      originalDsRef.current = svgPaths.map((info) => info.d)
+    }
+  }, [svgPaths])
+
+  // Attach mouseDown to each path
+  useEffect((): void => {
+    if (!svgPaths) return
+    svgPaths.forEach((info, idx) => {
+      info.path.style.cursor = 'grab'
+      info.path.onmousedown = onPathMouseDown(idx) as any
+    })
+  }, [svgPaths, onPathMouseDown])
+
+  // Reset handler
+  const handleReset = () => {
+    if (!svgPaths || !originalDsRef.current) return
+    originalDsRef.current.forEach((d, idx) => updatePathD(idx, d))
+  }
+
+  return (
+    <main ref={containerRef} className='flex flex-col min-h-screen w-screen items-center justify-center gap-4'>
+      <button
+        onClick={handleReset}
+        className='mb-4 px-4 py-2 bg-gray-200 rounded border border-gray-400 hover:bg-gray-300'>
+        Reset Path Positions
+      </button>
+      <IconConstraints>
+        <Airpods />
+      </IconConstraints>
+      {svgPaths && (
+        <div className='p-2 rounded shadow space-y-2'>
+          {svgPaths.map(
+            (info, idx): React.ReactNode => (
+              <div key={idx}>
+                <div className='text-xs mb-1'>Path {idx + 1}:</div>
+                <textarea
+                  value={info.d}
+                  onChange={(e) => updatePathD(idx, e.target.value)}
+                  rows={2}
+                  className='w-80 border p-1'
+                />
+              </div>
+            )
+          )}
+        </div>
+      )}
+    </main>
+  )
+}
