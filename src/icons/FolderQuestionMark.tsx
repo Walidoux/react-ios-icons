@@ -2,7 +2,7 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 /**
- * FolderQuestionMark icon
+ * FolderQuestionMark icon with 2 variants
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/FolderQuestionMark.tsx
  */
 export const FolderQuestionMark: IconProps<FilledProp> = ({

@@ -7,8 +7,7 @@ interface PaintBrushProps extends FilledProp {
 
 /**
  * PaintBrush Icon with 2 variants
- *
- * @component
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/PaintBrush.tsx
  */
 export const PaintBrush: IconProps<PaintBrushProps> = ({
   type = 'default',

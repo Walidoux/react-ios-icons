@@ -64,12 +64,12 @@ export function useNode<T extends HTMLElement>() {
         const viewBox = svgElem.viewBox.baseVal
         const svgPixelWidth = svgRect.width
         const svgPixelHeight = svgRect.height
-        const svgViewWidth =
-          viewBox && viewBox.width ? viewBox.width : svgElem.width.baseVal.value
-        const svgViewHeight =
-          viewBox && viewBox.height
-            ? viewBox.height
-            : svgElem.height.baseVal.value
+        const svgViewWidth = viewBox?.width
+          ? viewBox.width
+          : svgElem.width.baseVal.value
+        const svgViewHeight = viewBox?.height
+          ? viewBox.height
+          : svgElem.height.baseVal.value
         const origD = pathElem.getAttribute('d')
 
         const onMouseMove = (e: MouseEvent) => {
@@ -119,8 +119,12 @@ export function useNode<T extends HTMLElement>() {
                 // coordIdx: 0=rx, 1=ry, 2=x-axis-rotation, 3=large-arc-flag, 4=sweep-flag, 5=x, 6=y
                 let updated = num
 
-                if (coordIdx === 5) updated = num + dx
-                if (coordIdx === 6) updated = num + dy
+                if (coordIdx === 5) {
+                  updated = num + dx
+                }
+                if (coordIdx === 6) {
+                  updated = num + dy
+                }
 
                 coordIdx = (coordIdx + 1) % 7
 

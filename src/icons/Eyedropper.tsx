@@ -6,7 +6,7 @@ interface EyedropperProps {
 }
 
 /**
- * Eyedropper icon
+ * Eyedropper icon with 3 variants
  * @param {'half' | 'full' | 'empty'} [props.fillLevel] - fillLevel description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Eyedropper.tsx
  */

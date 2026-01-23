@@ -7,12 +7,8 @@ interface GlobeProps extends FilledProp {
 
 /**
  * Globe Icon with 6 variants
- *
- * ## Props
- * - `continent` (america | europe_africa | asia_australia)
- * - `filled` (boolean): If true, renders the filled version of the icon.
- *
- * @component
+ * @param {GlobeProps['continent']} [continent="america"]
+ * @param {boolean} [filled] - If true, renders the filled version of the icon.
  */
 export const Globe: IconProps<GlobeProps> = ({
   continent = 'america',

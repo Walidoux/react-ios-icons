@@ -16,6 +16,7 @@ type HandProps =
   | { type: 'thumbsup'; flipped?: boolean }
 
 /**
+ * Hand icon with 16 variants
  * { direction: d, braille: b, ...other } icon
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
  */

@@ -11,7 +11,7 @@ import chalk from 'chalk'
 import ts, { type ExportKeyword } from 'typescript'
 
 import pkg from '../package.json'
-import { ICONS_DIR } from './index.js'
+import { ICONS_DIR, REGEX } from '.'
 
 interface AuditResults {
   hasJSDoc: boolean
@@ -52,7 +52,10 @@ const extractPropsInfo = (
   let propsInterface!: ts.InterfaceDeclaration | null
 
   const visit = (node: ts.Node): void => {
-    if (ts.isInterfaceDeclaration(node) && /Props$/.test(node.name.text)) {
+    if (
+      ts.isInterfaceDeclaration(node) &&
+      REGEX.JSDOC.PROPS.test(node.name.text)
+    ) {
       propsInterface = node
     }
     ts.forEachChild(node, visit)
@@ -191,8 +194,8 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
           if (jsDocs?.length > 0) {
             hasJSDoc = true
             const jsdocText = jsDocs.map((j) => j.getText()).join('\n')
-            if (/@see\s+https?:\/\//.test(jsdocText)) {
-              const match = jsdocText.match(/@see\s+(https?:\/\/\S+)/)
+            if (REGEX.JSDOC.REF.test(jsdocText)) {
+              const match = jsdocText.match(REGEX.JSDOC.REF)
               if (
                 match != null &&
                 isValidDocLink(match[1] as string, expectedPattern)
@@ -229,7 +232,10 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
       }
     }
 
-    if (ts.isInterfaceDeclaration(node) && /Props$/.test(node.name.text)) {
+    if (
+      ts.isInterfaceDeclaration(node) &&
+      REGEX.JSDOC.PROPS.test(node.name.text)
+    ) {
       hasProps = true
     }
 
@@ -239,7 +245,7 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
   visit(sourceFile)
 
   if (changesMade) {
-    fs.writeFileSync(filePath, modifiedCode.replace(/\r\n/g, '\n'), 'utf8') // based on LF EOL sqquyence
+    fs.writeFileSync(filePath, modifiedCode.replace(/\r\n/g, '\n'), 'utf8') // based on LF EOL sequence
   }
 
   return { hasJSDoc, hasProps, hasDocLink, changesMade }

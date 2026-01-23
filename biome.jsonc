@@ -11,5 +11,16 @@
       "bracketSameLine": true,
       "jsxQuoteStyle": "single"
     }
+  },
+  "linter": {
+    "rules": {
+      "suspicious": {
+        "noUnknownAtRules": "off"
+      },
+      "style": {
+        "noNestedTernary": "off",
+        "useFilenamingConvention": "off"
+      }
+    }
   }
 }

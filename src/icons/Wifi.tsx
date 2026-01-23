@@ -6,8 +6,8 @@ interface WifiProps {
 }
 
 /**
- * Wifi icon
- * @param {'noWifi' | 'fast' | 'normal' | 'slow'} [props.internet] - internet description
+ * Wifi icon with 4 variants
+ * @param {WifiProps['internet']} [props.internet] - internet description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Wifi.tsx
  */
 export const Wifi: IconProps<WifiProps> = ({ internet = 'fast', ...rest }) => (

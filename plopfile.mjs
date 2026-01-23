@@ -28,8 +28,12 @@ export default (
         name: 'name',
         message: 'What would you like to call your icon?',
         validate: (icon) => {
-          if (icon === '') return chalk.red('⛔ Icon name cannot be empty')
-          if (iconsList.includes(icon)) return chalk.red('⛔ Already exists')
+          if (icon === '') {
+            return chalk.red('⛔ Icon name cannot be empty')
+          }
+          if (iconsList.includes(icon)) {
+            return chalk.red('⛔ Already exists')
+          }
           return true
         },
       },

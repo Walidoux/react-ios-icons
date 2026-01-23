@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- 📥 Supports <!-- ICON_COUNT -->154 out of 6,000 SF icons
+- 📥 Supports <!-- ICON_COUNT -->180 out of 6,000 SF icons
 - ✏️ **Editor Mode** — Dynamically changes position of path icons
 
 ## 🚀 Quick Start

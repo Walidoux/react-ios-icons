@@ -2,7 +2,7 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 /**
- * LadyBug icon
+ * LadyBug icon with 2 variants
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/LadyBug.tsx
  */
 export const LadyBug: IconProps<FilledProp> = ({ filled = false, ...rest }) => (

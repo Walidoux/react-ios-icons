@@ -2,7 +2,8 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 /**
- * Heart icon
+ * Heart icon with 2 variants
+ * @param {boolean} [filled=false] - Whether the heart is filled or not
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Heart.tsx
  */
 export const Heart: IconProps<FilledProp> = ({ filled = false, ...rest }) => (

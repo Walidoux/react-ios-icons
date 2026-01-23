@@ -3,7 +3,6 @@ import type { IconProps } from '../IconProps'
 
 /**
  * XMark icon
- * @param {Object} props - Component props
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/XMark.tsx
  */
 export const XMark: IconProps = ({ ...rest }) => (
