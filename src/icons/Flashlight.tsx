@@ -6,7 +6,7 @@ interface FlashLightProps {
 }
 
 /**
- * Flashlight icon
+ * Flashlight icon with 2 variants
  * @param {boolean} [props.isOn] - isOn description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Flashlight.tsx
  */

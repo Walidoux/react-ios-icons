@@ -2,7 +2,7 @@ import { Icon } from '../Icon'
 import type { FilledProp, IconProps } from '../IconProps'
 
 /**
- * Tortoise icon
+ * Tortoise icon with 2 variants
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Tortoise.tsx
  */
 export const Tortoise: IconProps<FilledProp> = ({

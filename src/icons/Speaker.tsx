@@ -6,7 +6,7 @@ interface SpeakerProps extends DisableProp, FilledProp {
 }
 
 /**
- * Speaker icon
+ * Speaker icon with 10 variants
  * @param {'high' | 'normal' | 'low'} [props.pitch] - pitch description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Speaker.tsx
  */

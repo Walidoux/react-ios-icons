@@ -2,7 +2,7 @@ import { Icon } from '../Icon'
 import type { DisableProp, IconProps } from '../IconProps'
 
 /**
- * Shareplay icon
+ * Shareplay icon with 2 variants
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Shareplay.tsx
  */
 export const Shareplay: IconProps<DisableProp> = ({

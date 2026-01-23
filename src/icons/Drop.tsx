@@ -6,7 +6,7 @@ interface DropProps extends FilledProp {
 }
 
 /**
- * Drop icon
+ * Drop icon with 4 variants
  * @param {'default' | 'triangle'} [props.type] - type description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Drop.tsx
  */

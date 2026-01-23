@@ -6,7 +6,7 @@ interface ShoeProps extends FilledProp {
 }
 
 /**
- * Shoe icon
+ * Shoe icon with 4 variants
  * @param {boolean} [props.double] - double description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Shoe.tsx
  */

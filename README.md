@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- 📥 Supports <!-- ICON_COUNT -->115 out of 6,000 SF icons
+- 📥 Supports <!-- ICON_COUNT -->154 out of 6,000 SF icons
 - ✏️ **Editor Mode** — Dynamically changes position of path icons
 
 ## 🚀 Quick Start
@@ -38,11 +38,17 @@ You will be prompted with a few questions to help generate starter code for your
 
 ## 📍 Roadmap
 
-- [x] markdown : display the number of icons out of total of SF symbols total icons
-- [x] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)
 - [ ] icons : add categories like this : `<Health.Heart />`
 - [ ] docs : add themed doc with basic search bar
-- [x] example : add editor mode to dynamically adjust path attribute value
 - [ ] docs : infer icon count variants from tsx files
 - [ ] example : draw symetrical alignements lines for x/y axis inside contraints
-- [ ] code (linter/formatter) : migrate eslint/prettier to biomejs
+
+<details>
+    <summary>✅ Completed roadmap</summary>
+
+- [x] code (linter/formatter) : migrate eslint/prettier to biomejs/ultracite toolchain
+- [x] example : add editor mode to dynamically adjust path attribute value
+- [x] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)
+- [x] markdown : display the number of icons out of total of SF symbols total icons
+
+</details>

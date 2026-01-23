@@ -3,11 +3,8 @@ import type { FilledProp, IconProps } from '../IconProps'
 
 /**
  * Hare Icon with 2 variants
- *
- * ## Props
- * - `filled` (boolean): If true, renders the filled version of the icon.
- *
- * @component
+ * @param {boolean} [filled] - If true, renders the filled version of the icon.
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hare.tsx
  */
 export const Hare: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>

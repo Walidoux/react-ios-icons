@@ -6,7 +6,7 @@ interface FolderProps extends FilledProp {
 }
 
 /**
- * typeParams icon
+ * Folder icon with 12 variants
  * @param {'add' | 'remove' | 'question' | 'user' | 'settings' | 'idle'} [props.type] - type description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Folder.tsx
  */

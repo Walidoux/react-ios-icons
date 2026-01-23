@@ -5,13 +5,12 @@
  */
 
 import fs from 'node:fs'
-import { createRequire } from 'node:module'
 import path from 'node:path'
 
 import chalk from 'chalk'
-import type { ExportKeyword } from 'typescript'
-import ts from 'typescript'
+import ts, { type ExportKeyword } from 'typescript'
 
+import pkg from '../package.json'
 import { ICONS_DIR } from './index.js'
 
 interface AuditResults {
@@ -20,9 +19,6 @@ interface AuditResults {
   hasDocLink: boolean
   changesMade: boolean
 }
-
-const require = createRequire(import.meta.url)
-const pkg = require('../package.json')
 
 /**
  * Checks if URL matches the expected pattern

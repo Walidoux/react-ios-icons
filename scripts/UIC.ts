@@ -5,7 +5,7 @@ import path from 'node:path'
 
 import chalk from 'chalk'
 
-import { ICONS_DIR, PLACEHOLDER_ICON_COUNT, README_PATH } from './index.js'
+import { ICONS_DIR, PLACEHOLDER_ICON_COUNT, README_PATH } from '.'
 
 const extractVariantCount = (content: string): number => {
   const match = content.match(/icon with (\d+) variants/i)

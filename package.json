@@ -11,8 +11,8 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "generate:icon": "plop",
-    "scripts:uic": "node --no-warnings --loader ts-node/esm scripts/UIC.ts",
-    "scripts:audit": "node --no-warnings --loader ts-node/esm scripts/audit.ts",
+    "scripts:uic": "bun run scripts/UIC.ts",
+    "scripts:audit": "bun run scripts/audit.ts",
     "scripts:sync": "ncp example docs --filter=\"node_modules\" --stopOnErr",
     "lint:typescript": "tsc --noemit",
     "lint:check": "ultracite check",
@@ -32,7 +32,6 @@
     "plop": "3.1.2",
     "semantic-release": "^21.0.9",
     "terser": "5.19.2",
-    "ts-node": "^10.9.2",
     "tsup": "7.2.0",
     "typescript": "^5.1.6",
     "ultracite": "7.0.12"
