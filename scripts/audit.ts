@@ -206,6 +206,7 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
           } else if (componentName != null) {
             const jsDoc = generateJSDoc(
               componentName,
+              // @ts-expect-error TODO: fix this
               propsInfo,
               docLink,
               expectedPattern

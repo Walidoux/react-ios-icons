@@ -1,6 +1,7 @@
 import { Icon } from '../Icon'
 import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 
+// biome-ignore lint/style/noEnum: emancipation
 enum Direction {
   UP = 0,
   UP_RIGHT = 20,

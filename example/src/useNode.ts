@@ -89,6 +89,7 @@ export function useNode<T extends HTMLElement>() {
             let coordIdx = 0
 
             const updatedTokens = tokens.map((token) => {
+              // biome-ignore lint/performance/useTopLevelRegex: we don't care
               if (/^[a-zA-Z]$/.test(token)) {
                 currentCommand = token
                 coordIdx = 0

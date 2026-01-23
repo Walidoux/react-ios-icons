@@ -29,8 +29,5 @@ jobs:
       - name: Tsc > Type checking
         run: bun run lint:typescript
 
-      - name: Prettier > Formatting
+      - name: Ultracite > Formatting
         run: bun run lint:check
-
-      - name: Eslint > Analyzing
-        run: bun run lint:eslint
