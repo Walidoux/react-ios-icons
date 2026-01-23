@@ -1,4 +1,4 @@
-import path from "node:path"
+import path from 'node:path'
 
 export const ICONS_DIR = path.join(process.cwd(), 'src', 'icons')
 export const README_PATH = path.join(process.cwd(), 'README.md')

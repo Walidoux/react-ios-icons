@@ -14,7 +14,11 @@ interface GlobeProps extends FilledProp {
  *
  * @component
  */
-export const Globe: IconProps<GlobeProps> = ({ continent = 'america', filled = false, ...rest }) => (
+export const Globe: IconProps<GlobeProps> = ({
+  continent = 'america',
+  filled = false,
+  ...rest
+}) => (
   <Icon {...rest}>
     {continent === 'europe_africa' ? (
       <path

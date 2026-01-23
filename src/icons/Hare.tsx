@@ -1,5 +1,5 @@
 import { Icon } from '../Icon'
-import type { IconProps, FilledProp } from '../IconProps'
+import type { FilledProp, IconProps } from '../IconProps'
 
 /**
  * Hare Icon with 2 variants

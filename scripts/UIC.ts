@@ -15,7 +15,9 @@ const extractVariantCount = (content: string): number => {
 const getTotalVariants = (): number => {
   let total = 0
 
-  for (const file of fs.readdirSync(ICONS_DIR).filter((f) => f.endsWith('.tsx'))) {
+  for (const file of fs
+    .readdirSync(ICONS_DIR)
+    .filter((f) => f.endsWith('.tsx'))) {
     const filePath = path.join(ICONS_DIR, file)
     const content = fs.readFileSync(filePath, 'utf8')
     total += extractVariantCount(content)
@@ -24,7 +26,7 @@ const getTotalVariants = (): number => {
   return total
 }
 
-const updateReadme = (total: number): void => {
+const updateReadme = (total: number) => {
   const regex = new RegExp(`${PLACEHOLDER_ICON_COUNT}(\\s*\\d+)?`)
   let readme = fs.readFileSync(README_PATH, 'utf8')
 

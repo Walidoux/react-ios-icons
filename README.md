@@ -40,8 +40,9 @@ You will be prompted with a few questions to help generate starter code for your
 
 - [x] markdown : display the number of icons out of total of SF symbols total icons
 - [x] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)
-- [ ] icons : add categories like this : `<Health.Heart filled />`
+- [ ] icons : add categories like this : `<Health.Heart />`
 - [ ] docs : add themed doc with basic search bar
 - [x] example : add editor mode to dynamically adjust path attribute value
 - [ ] docs : infer icon count variants from tsx files
 - [ ] example : draw symetrical alignements lines for x/y axis inside contraints
+- [ ] code (linter/formatter) : migrate eslint/prettier to biomejs

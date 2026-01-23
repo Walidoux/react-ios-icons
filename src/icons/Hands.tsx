@@ -10,7 +10,11 @@ interface HandsProps extends FilledProp {
  * @param {'wave' | 'clap' | 'sparkles'} props.type - type description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hands.tsx
  */
-export const Hands: IconProps<HandsProps> = ({ type = 'wave', filled = false, ...rest }) => (
+export const Hands: IconProps<HandsProps> = ({
+  type = 'wave',
+  filled = false,
+  ...rest
+}) => (
   <Icon {...rest}>
     {type === 'clap' ? (
       <path

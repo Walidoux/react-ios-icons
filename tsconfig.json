@@ -2,13 +2,16 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "moduleResolution": "node",
     "declaration": true,
     "esModuleInterop": true,
     "removeComments": true,
     "jsx": "preserve",
-
     "strict": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -23,6 +26,10 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true
   },
-
-  "exclude": ["node_modules", "dist", "example", "docs"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "example",
+    "docs"
+  ]
 }

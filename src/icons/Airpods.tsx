@@ -7,7 +7,15 @@ import { AirpodLeftPath, AirpodRightPath } from './Airpod'
  */
 export const Airpods: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
-    <path d={AirpodLeftPath} style={{ transform: 'translateX(6.5px)' }} fill='currentColor' />
-    <path d={AirpodRightPath} style={{ transform: 'translateX(-6.5px)' }} fill='currentColor' />
+    <path
+      d={AirpodLeftPath}
+      fill='currentColor'
+      style={{ transform: 'translateX(6.5px)' }}
+    />
+    <path
+      d={AirpodRightPath}
+      fill='currentColor'
+      style={{ transform: 'translateX(-6.5px)' }}
+    />
   </Icon>
 )

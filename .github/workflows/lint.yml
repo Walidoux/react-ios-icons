@@ -30,7 +30,7 @@ jobs:
         run: bun run lint:typescript
 
       - name: Prettier > Formatting
-        run: bun run lint:prettier
+        run: bun run lint:check
 
       - name: Eslint > Analyzing
         run: bun run lint:eslint

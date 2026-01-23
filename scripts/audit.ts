@@ -5,8 +5,8 @@
  */
 
 import fs from 'node:fs'
-import path from 'node:path'
 import { createRequire } from 'node:module'
+import path from 'node:path'
 
 import chalk from 'chalk'
 import type { ExportKeyword } from 'typescript'
@@ -52,7 +52,7 @@ const isValidDocLink = (url: string, expectedPattern: string): boolean => {
  */
 const extractPropsInfo = (
   sourceFile: ts.SourceFile
-): { interfaceName: string; props: ts.PropertySignature[] } | null => {
+): { interfaceName: string; props: ts.PropertySignature[] } | undefined => {
   let propsInterface!: ts.InterfaceDeclaration | null
 
   const visit = (node: ts.Node): void => {
@@ -64,11 +64,14 @@ const extractPropsInfo = (
 
   visit(sourceFile)
 
-  if (propsInterface == null) return null
-
-  return {
-    interfaceName: propsInterface.name.text,
-    props: propsInterface.members.filter((element): element is ts.PropertySignature => ts.isPropertySignature(element))
+  if (propsInterface != null) {
+    return {
+      interfaceName: propsInterface.name.text,
+      props: propsInterface.members.filter(
+        (element): element is ts.PropertySignature =>
+          ts.isPropertySignature(element)
+      ),
+    }
   }
 }
 
@@ -86,7 +89,9 @@ const generateJSDoc = (
   docLink: string,
   expectedPattern: string
 ): string => {
-  const validLink = isValidDocLink(docLink, expectedPattern) ? docLink : 'https://example.com/icons'
+  const validLink = isValidDocLink(docLink, expectedPattern)
+    ? docLink
+    : 'https://example.com/icons'
 
   if (propsInfo != null) {
     const propLines = propsInfo.props.map((prop): string => {
@@ -150,7 +155,12 @@ const getComponentName = (sourceFile: ts.SourceFile): string | null => {
 
 const auditAndFixIconFile = (filePath: string): AuditResults => {
   const code = fs.readFileSync(filePath, 'utf8')
-  const sourceFile = ts.createSourceFile(filePath, code, ts.ScriptTarget.Latest, true)
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    code,
+    ts.ScriptTarget.Latest,
+    true
+  )
 
   let hasJSDoc = false
   let hasProps = false
@@ -168,14 +178,18 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
     if (
       ts.isVariableStatement(node) &&
       Array.isArray(node.modifiers) &&
-      node.modifiers.some((m): m is ExportKeyword => m.kind === ts.SyntaxKind.ExportKeyword)
+      node.modifiers.some(
+        (m): m is ExportKeyword => m.kind === ts.SyntaxKind.ExportKeyword
+      )
     ) {
       for (const declaration of node.declarationList.declarations) {
         const initializer = declaration.initializer
         if (
           initializer != null &&
-          (ts.isArrowFunction(initializer) || ts.isFunctionExpression(initializer)) &&
-          (initializer.body.getText().includes('<') || initializer.body.getText().includes('React.createElement'))
+          (ts.isArrowFunction(initializer) ||
+            ts.isFunctionExpression(initializer)) &&
+          (initializer.body.getText().includes('<') ||
+            initializer.body.getText().includes('React.createElement'))
         ) {
           const jsDocs = ts.getJSDocCommentsAndTags(node)
           if (jsDocs?.length > 0) {
@@ -183,18 +197,33 @@ const auditAndFixIconFile = (filePath: string): AuditResults => {
             const jsdocText = jsDocs.map((j) => j.getText()).join('\n')
             if (/@see\s+https?:\/\//.test(jsdocText)) {
               const match = jsdocText.match(/@see\s+(https?:\/\/\S+)/)
-              if (match != null && isValidDocLink(match[1] as string, expectedPattern)) {
+              if (
+                match != null &&
+                isValidDocLink(match[1] as string, expectedPattern)
+              ) {
                 hasDocLink = true
               }
             }
           } else if (componentName != null) {
-            const jsDoc = generateJSDoc(componentName, propsInfo, docLink, expectedPattern)
+            const jsDoc = generateJSDoc(
+              componentName,
+              propsInfo,
+              docLink,
+              expectedPattern
+            )
             const startPos = node.getStart(sourceFile)
-            const prevChar = modifiedCode.slice(Math.max(0, startPos - 1), startPos)
+            const prevChar = modifiedCode.slice(
+              Math.max(0, startPos - 1),
+              startPos
+            )
             const needsNewline = !['\n', '\r', undefined].includes(prevChar)
 
             modifiedCode =
-              modifiedCode.slice(0, startPos) + (needsNewline ? '\n' : '') + jsDoc + '\n' + modifiedCode.slice(startPos)
+              modifiedCode.slice(0, startPos) +
+              (needsNewline ? '\n' : '') +
+              jsDoc +
+              '\n' +
+              modifiedCode.slice(startPos)
 
             changesMade = true
             hasJSDoc = true
@@ -224,11 +253,17 @@ for (const icon of fs.readdirSync(ICONS_DIR)) {
   const iconPath = path.join(ICONS_DIR, icon)
   const result = auditAndFixIconFile(iconPath)
 
-  const status = result.changesMade ? chalk.bgGreen.black(' FIXED ') : chalk.bgGreenBright.black(' OK ')
+  const status = result.changesMade
+    ? chalk.bgGreen.black(' FIXED ')
+    : chalk.bgGreenBright.black(' OK ')
 
   const jsdoc = result.hasJSDoc ? chalk.green('JSDoc✓') : chalk.gray('JSDoc✗')
   const props = result.hasProps ? chalk.green('Props✓') : chalk.gray('Props✗')
-  const doclink = result.hasDocLink ? chalk.green('DocLink✓') : chalk.gray('DocLink✗')
+  const doclink = result.hasDocLink
+    ? chalk.green('DocLink✓')
+    : chalk.gray('DocLink✗')
 
-  console.log(`${chalk.cyan(icon.padEnd(24))} ${status} ${jsdoc} ${props} ${doclink}`)
+  console.log(
+    `${chalk.cyan(icon.padEnd(24))} ${status} ${jsdoc} ${props} ${doclink}`
+  )
 }

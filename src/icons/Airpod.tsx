@@ -15,8 +15,14 @@ export const AirpodRightPath =
  * @param {Direction} [direction="left"] - Direction of the Airpod icon (left or right)
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Airpod.tsx
  */
-export const Airpod: IconProps<AirpodProps> = ({ direction = 'left', ...rest }) => (
+export const Airpod: IconProps<AirpodProps> = ({
+  direction = 'left',
+  ...rest
+}) => (
   <Icon {...rest}>
-    <path d={direction === 'left' ? AirpodLeftPath : AirpodRightPath} fill='currentColor' />
+    <path
+      d={direction === 'left' ? AirpodLeftPath : AirpodRightPath}
+      fill='currentColor'
+    />
   </Icon>
 )

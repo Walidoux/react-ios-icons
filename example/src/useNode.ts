@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 type SvgPathInfo = { path: SVGPathElement; d: string }
 
@@ -24,7 +24,7 @@ export function useNode<T extends HTMLElement>() {
       paths.push(
         ...Array.from(svg.querySelectorAll('path')).map((path) => ({
           path,
-          d: path.getAttribute('d') || ''
+          d: path.getAttribute('d') || '',
         }))
       )
     })
@@ -59,8 +59,12 @@ export function useNode<T extends HTMLElement>() {
       const viewBox = svgElem.viewBox.baseVal
       const svgPixelWidth = svgRect.width
       const svgPixelHeight = svgRect.height
-      const svgViewWidth = viewBox && viewBox.width ? viewBox.width : svgElem.width.baseVal.value
-      const svgViewHeight = viewBox && viewBox.height ? viewBox.height : svgElem.height.baseVal.value
+      const svgViewWidth =
+        viewBox && viewBox.width ? viewBox.width : svgElem.width.baseVal.value
+      const svgViewHeight =
+        viewBox && viewBox.height
+          ? viewBox.height
+          : svgElem.height.baseVal.value
       const origD = pathElem.getAttribute('d')!
 
       const onMouseMove = (e: MouseEvent) => {
@@ -88,20 +92,23 @@ export function useNode<T extends HTMLElement>() {
           // only update coordinates for commands that use x/y pairs which are (M, L, T, S, Q, C)
           // V: only y, H: only x, A: rx ry x-axis-rotation large-arc-flag sweep-flag x y
           if ('MLTQCS'.includes(currentCommand)) {
-            const num = parseFloat(token)
+            const num = Number.parseFloat(token)
             const updated = coordIdx % 2 === 0 ? num + dx : num + dy
 
             coordIdx++
 
             return updated
-          } else if (currentCommand === 'H') {
-            return parseFloat(token) + dx // Only x
-          } else if (currentCommand === 'V') {
-            return parseFloat(token) + dy // Only y
-          } else if (currentCommand === 'A') {
+          }
+          if (currentCommand === 'H') {
+            return Number.parseFloat(token) + dx // Only x
+          }
+          if (currentCommand === 'V') {
+            return Number.parseFloat(token) + dy // Only y
+          }
+          if (currentCommand === 'A') {
             // Arc: rx ry x-axis-rotation large-arc-flag sweep-flag x y
             // Only update last two numbers (x, y)
-            const num = parseFloat(token)
+            const num = Number.parseFloat(token)
 
             // coordIdx: 0=rx, 1=ry, 2=x-axis-rotation, 3=large-arc-flag, 4=sweep-flag, 5=x, 6=y
             let updated = num
@@ -112,7 +119,8 @@ export function useNode<T extends HTMLElement>() {
             coordIdx = (coordIdx + 1) % 7
 
             return updated
-          } else return token // for Z or unknown just return as is
+          }
+          return token // for Z or unknown just return as is
         })
 
         const newD = updatedTokens.join(' ')
@@ -136,6 +144,6 @@ export function useNode<T extends HTMLElement>() {
     containerRef,
     svgPaths,
     updatePathD,
-    onPathMouseDown
+    onPathMouseDown,
   }
 }
