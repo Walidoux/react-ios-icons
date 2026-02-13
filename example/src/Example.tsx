@@ -13,8 +13,16 @@ const IconConstraints: React.FC<PropsWithChildren> = ({ children }) => (
 )
 
 export default () => {
-  const { containerRef, svgPaths, updatePathD, onPathMouseDown } =
-    useNode<HTMLDivElement>()
+  const {
+    containerRef,
+    svgPaths,
+    updatePathD,
+    onPathMouseDown,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+  } = useNode<HTMLDivElement>()
 
   const originalDsRef = useRef<string[] | null>(null)
   const [sizeInfo, setSizeInfo] = useState<string>('')
@@ -35,6 +43,29 @@ export default () => {
       })
     }
   }, [svgPaths, onPathMouseDown])
+
+  // Keyboard shortcuts for undo/redo
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
+      const isCtrl = isMac ? e.metaKey : e.ctrlKey
+
+      if (isCtrl && e.key.toLowerCase() === 'z') {
+        e.preventDefault()
+        if (e.shiftKey) {
+          redo()
+        } else {
+          undo()
+        }
+      } else if (isCtrl && e.key.toLowerCase() === 'y') {
+        e.preventDefault()
+        redo()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [undo, redo])
 
   const handleReset = () => {
     if (svgPaths && originalDsRef.current) {
@@ -108,18 +139,44 @@ export default () => {
     <main
       className='flex min-h-screen w-screen flex-col items-center justify-center gap-4'
       ref={containerRef}>
-      <button
-        className='mb-4 rounded border border-gray-400 bg-gray-200 px-4 py-2 hover:bg-gray-300'
-        onClick={handleReset}
-        type='button'>
-        Reset Path Positions
-      </button>
-      <button
-        className='mb-4 rounded border border-gray-400 bg-gray-200 px-4 py-2 hover:bg-gray-300'
-        onClick={handleOptimize}
-        type='button'>
-        Optimize
-      </button>
+      <div className='flex flex-wrap gap-2'>
+        <button
+          className={`rounded border border-gray-400 px-4 py-2 ${
+            canUndo
+              ? 'bg-gray-200 hover:bg-gray-300'
+              : 'cursor-not-allowed bg-gray-100 text-gray-400'
+          }`}
+          disabled={!canUndo}
+          onClick={undo}
+          title='Undo (Ctrl/Cmd+Z)'
+          type='button'>
+          Undo
+        </button>
+        <button
+          className={`rounded border border-gray-400 px-4 py-2 ${
+            canRedo
+              ? 'bg-gray-200 hover:bg-gray-300'
+              : 'cursor-not-allowed bg-gray-100 text-gray-400'
+          }`}
+          disabled={!canRedo}
+          onClick={redo}
+          title='Redo (Ctrl/Cmd+Y or Ctrl/Cmd+Shift+Z)'
+          type='button'>
+          Redo
+        </button>
+        <button
+          className='rounded border border-gray-400 bg-gray-200 px-4 py-2 hover:bg-gray-300'
+          onClick={handleReset}
+          type='button'>
+          Reset Path Positions
+        </button>
+        <button
+          className='rounded border border-gray-400 bg-gray-200 px-4 py-2 hover:bg-gray-300'
+          onClick={handleOptimize}
+          type='button'>
+          Optimize
+        </button>
+      </div>
       {sizeInfo && (
         <div className='mb-4 text-green-600 text-sm'>{sizeInfo}</div>
       )}
