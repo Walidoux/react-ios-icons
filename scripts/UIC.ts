@@ -9,6 +9,8 @@ import { ICONS_DIR, PLACEHOLDER_ICON_COUNT, README_PATH } from '.'
 
 const variantRegex = /icon with (\d+) variants/i
 
+const dry = process.argv.includes('--dry')
+
 const extractVariantCount = (content: string): number => {
   const match = content.match(variantRegex)
   return match != null ? Number.parseInt(match[1] as string, 10) : 1 // fallback to 1 if no match found meaning icon has no variants
@@ -35,7 +37,7 @@ const getCurrentTotalFromReadme = (): number => {
   return match != null ? Number.parseInt(match[1] as string, 10) : 0
 }
 
-const updateReadme = (total: number) => {
+const updateReadme = (total: number, dry = false) => {
   const regex = new RegExp(`${PLACEHOLDER_ICON_COUNT}(\\s*\\d+)?`)
   let readme = fs.readFileSync(README_PATH, 'utf8')
 
@@ -46,17 +48,22 @@ const updateReadme = (total: number) => {
     process.exit(1)
   }
 
-  return fs.writeFileSync(README_PATH, readme)
+  if (!dry) {
+    fs.writeFileSync(README_PATH, readme)
+  }
+
+  return readme
 }
 
 const oldTotal = getCurrentTotalFromReadme()
 const total = getTotalVariants()
 
 if (oldTotal !== total) {
-  updateReadme(total)
+  updateReadme(total, dry)
+  const action = dry ? 'Would update' : 'Updated'
   console.log(
     chalk.green(
-      `Updated README with total icon variants: from ${oldTotal} to ${total}`
+      `${action} README with total icon variants: from ${oldTotal} to ${total}`
     )
   )
 } else {

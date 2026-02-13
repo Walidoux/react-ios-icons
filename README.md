@@ -4,8 +4,10 @@
 
 ## ✨ Features
 
-- 📥 Supports <!-- ICON_COUNT -->180 out of 6,000 SF icons
+- 📥 Supports around <!-- ICON_COUNT -->206 out of 6,900 SF icons
 - ✏️ **Editor Mode** — Dynamically changes position of path icons
+
+Does not require SF Pro Display font
 
 ## 🚀 Quick Start
 
@@ -42,10 +44,12 @@ You will be prompted with a few questions to help generate starter code for your
 - [ ] docs : add themed doc with basic search bar
 - [ ] docs : infer icon count variants from tsx files
 - [ ] example : draw symetrical alignements lines for x/y axis inside contraints
+- [ ] example : add undo/redo actions when manipulating svgs
 
 <details>
     <summary>✅ Completed roadmap</summary>
 
+- [x] example : add path optimization for svgs
 - [x] code (linter/formatter) : migrate eslint/prettier to biomejs/ultracite toolchain
 - [x] example : add editor mode to dynamically adjust path attribute value
 - [x] example : add debug mode to display icon contraints for visual consistency following [Apple's icon design best practices](https://developer.apple.com/design/human-interface-guidelines/icons#Best-practices)

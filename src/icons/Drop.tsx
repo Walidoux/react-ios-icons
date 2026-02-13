@@ -7,7 +7,8 @@ interface DropProps extends FilledProp {
 
 /**
  * Drop icon with 4 variants
- * @param {'default' | 'triangle'} [props.type] - type description
+ * @param {DropProps['type']} [props.type] - type description
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Drop.tsx
  */
 export const Drop: IconProps<DropProps> = ({

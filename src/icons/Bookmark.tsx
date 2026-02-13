@@ -8,6 +8,9 @@ interface BookmarkProps extends FilledProp, DisableProp {
 /**
  * Bookmark Icon with 6 variants
  * @param {BookmarkProps["circled"]} [circled] - Displays circle around the bookmark
+ * @param {Boolean} [disabled] - disabled description
+ * @param {Boolean} [filled] - filled description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Bookmark.tsx
  */
 export const Bookmark: IconProps<BookmarkProps> = ({
   disabled = false,

@@ -10,6 +10,7 @@ interface PhoneProps extends FilledProp {
 /**
  * Phone icon with 2 variants
  * @param {boolean} [props.isPutDown] - isPutDown description
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Phone.tsx
  */
 export const Phone: IconProps<PhoneProps> = ({

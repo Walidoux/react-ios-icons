@@ -1,21 +1,16 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
-import { AirpodLeftPath, AirpodRightPath } from './Airpod'
 
-/** Airpods icon
- * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Airpods.tsx
+/**
+ * Airpod icon with 2 variants
+ * @param {Direction} [direction="left"] - Direction of the Airpod icon (left or right)
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Airpod.tsx
  */
-export const Airpods: IconProps = ({ ...rest }) => (
+export const Airpods: IconProps = ({ direction = 'left', ...rest }) => (
   <Icon {...rest}>
     <path
-      d={AirpodLeftPath}
+      d='M2.666 4.922A2.98 2.98 0 0 1 .188 3.557 1.17 1.17 0 0 1 0 2.9v-.873c0-.246.059-.463.188-.662C.609.745 1.424 0 2.666 0c1.418 0 2.602 1.107 2.625 2.455C5.309 3.82 4.09 4.94 2.666 4.922m6.604 0c-1.418.017-2.643-1.102-2.62-2.467C6.668 1.107 7.852 0 9.27 0c1.248 0 2.056.744 2.478 1.365.135.2.188.416.188.662V2.9c0 .24-.059.457-.188.657A2.98 2.98 0 0 1 9.27 4.922M1.154 3.439c.17 0 .3-.128.3-.298V1.78a.29.29 0 0 0-.3-.293.29.29 0 0 0-.293.293v1.36c0 .17.13.298.293.298m9.627 0a.29.29 0 0 0 .293-.298V1.78a.29.29 0 0 0-.293-.293.29.29 0 0 0-.299.293v1.36c0 .17.13.298.3.298M2.906 9.71V5.537A3.3 3.3 0 0 0 4.7 4.87v4.84zm6.123 0H7.236V4.87c.51.387 1.125.621 1.793.668zm-5.478 1.998c-.387 0-.645-.205-.645-.586v-.768H4.7v.768c0 .381-.246.586-.644.586zm4.834 0H7.88c-.393 0-.645-.205-.645-.586v-.768H9.03v.768c0 .381-.258.586-.644.586'
       fill='currentColor'
-      style={{ transform: 'translateX(6.5px)' }}
-    />
-    <path
-      d={AirpodRightPath}
-      fill='currentColor'
-      style={{ transform: 'translateX(-6.5px)' }}
     />
   </Icon>
 )

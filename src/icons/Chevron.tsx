@@ -8,8 +8,9 @@ interface ChevronProps {
 }
 
 /**
- * Chevron icon
- * @param {'up' | 'down' | 'left' | 'right'} [props.direction] - direction description
+ * Chevron icon with 4 variants
+ * @param {ChevronProps['direction']} [props.direction="up"] - direction description
+ * @param {boolean} [className] - className description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Chevron.tsx
  */
 export const Chevron: IconProps<ChevronProps> = ({

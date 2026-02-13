@@ -18,7 +18,9 @@ type HandProps =
 
 /**
  * Hand icon with 16 variants
- * { direction: d, braille: b, ...other } icon
+ * @param {boolean} [type] - type description
+ * @param {boolean} [filled] - filled description
+ * @param {boolean} [disabled] - disabled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Hand.tsx
  */
 export const Hand: IconProps<HandProps & FilledProp & DisableProp> = ({

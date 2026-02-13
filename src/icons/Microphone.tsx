@@ -8,6 +8,8 @@ interface MicrophoneProps extends DisableProp, FilledProp {
 /**
  * Microphone icon with 6 variants
  * @param {MicrophoneProps["circled"]} [circled] - Shows a circle around the microphone
+ * @param {boolean} [filled] - filled description
+ * @param {boolean} [disabled] - disabled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Microphone.tsx
  */
 export const Microphone: IconProps<MicrophoneProps> = ({

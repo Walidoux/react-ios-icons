@@ -4,8 +4,10 @@
 /// @PLOP_EXPORTS
 export { Circle } from './icons/Circle'
 export { PaintBrush } from './icons/PaintBrush'
-export { Airpods } from './icons/Airpods'
+export { AirpodsGen3 } from './icons/AirpodsGen3'
+export { AirpodGen3 } from './icons/AirpodGen3'
 export { Airpod } from './icons/Airpod'
+export { Airpods } from './icons/Airpods'
 export { Globe } from './icons/Globe'
 export { LadyBug } from './icons/LadyBug'
 export { Leaf } from './icons/Leaf'

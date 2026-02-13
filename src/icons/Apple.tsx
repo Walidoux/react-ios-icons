@@ -1,7 +1,10 @@
 import { Icon } from '../Icon'
 import type { IconProps } from '../IconProps'
 
-/** Apple icon */
+/**
+ * Apple icon
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Apple.tsx
+ */
 export const Apple: IconProps = ({ ...rest }) => (
   <Icon {...rest}>
     <path

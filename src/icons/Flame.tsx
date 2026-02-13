@@ -3,6 +3,7 @@ import type { FilledProp, IconProps } from '../IconProps'
 
 /**
  * Flame icon with 2 variants
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Flame.tsx
  */
 export const Flame: IconProps<FilledProp> = ({ filled = false, ...rest }) => (

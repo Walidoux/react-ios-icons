@@ -9,6 +9,7 @@ interface GlobeProps extends FilledProp {
  * Globe Icon with 6 variants
  * @param {GlobeProps['continent']} [continent="america"]
  * @param {boolean} [filled] - If true, renders the filled version of the icon.
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Globe.tsx
  */
 export const Globe: IconProps<GlobeProps> = ({
   continent = 'america',

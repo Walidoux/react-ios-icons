@@ -8,6 +8,9 @@ interface BellProps extends FilledProp, DisableProp {
 /**
  * Bell icon with 10 variants
  * @param {BellProps["type"]} [type] - Display type of bell either with notification indicator or circled
+ * @param {boolean} [filled] - filled description
+ * @param {boolean} [disabled] - disabled description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Bell.tsx
  */
 export const Bell: IconProps<BellProps> = ({
   type = 'default',

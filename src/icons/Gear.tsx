@@ -8,6 +8,7 @@ interface GearProps extends FilledProp {
 /**
  * Gear icon
  * @param {boolean} [props.hasDouble] - hasDouble description
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Gear.tsx
  */
 export const Gear: IconProps<GearProps> = ({

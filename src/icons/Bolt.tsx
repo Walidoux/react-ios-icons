@@ -8,6 +8,9 @@ interface BoltProps extends FilledProp, DisableProp {
 /**
  * Bolt icon with 8 variants
  * @param {BoltProps['circled']} [circled] - Displays circle around it
+ * @param {boolean} [filled] - filled description
+ * @param {boolean} [disabled] - disabled description
+ * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Bolt.tsx
  */
 export const Bolt: IconProps<BoltProps> = ({
   circled = false,

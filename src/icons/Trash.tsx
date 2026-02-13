@@ -3,6 +3,8 @@ import type { DisableProp, FilledProp, IconProps } from '../IconProps'
 
 /**
  * Trash icon with 4 variants
+ * @param {boolean} [filled] - filled description
+ * @param {boolean} [disabled] - disabled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Trash.tsx
  */
 export const Trash: IconProps<DisableProp & FilledProp> = ({

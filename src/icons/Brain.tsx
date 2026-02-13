@@ -3,7 +3,11 @@ import type { FilledProp, IconProps } from '../IconProps'
 
 /**
  * Brain icon
+ *
+ * @param {boolean} [filled] - filled description
+ *
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Brain.tsx
+
  */
 export const Brain: IconProps<FilledProp> = ({ filled = false, ...rest }) => (
   <Icon {...rest}>

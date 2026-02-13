@@ -14,17 +14,17 @@ type BubbleChatProps = {
 )
 
 /**
- * getPathPosition icon
+ * BubbleChat icon with 18 variants
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/BubbleChat.ts
  */
 export const BubbleChat: IconProps<BubbleChatProps & FilledProp> = ({
   filled = false,
-  className,
-  ...props
+  ...rest
 }) => {
   const getPathPosition = () => {
-    if (props.type == null || props.type === 'normal') {
-      switch (props.position) {
+    if (rest.type == null || rest.type === 'normal') {
+      switch (rest.position) {
         case 'middle':
           return `M14.98 27c.45 0 .868-.201 1.268-.931l1.846-3.27h3.334c2.975 0 4.572-1.746 4.572-4.847V9.847C26 6.746 24.403 5 21.428 5H8.572C5.597 5 4 6.735 4 9.847v8.105C4 21.063 5.597 22.8 8.572 22.8h3.294l1.846 3.27c.4.73.819.931 1.268.931Zm0-1.735-1.667-3.313c-.33-.688-.569-.857-1.278-.857H8.572c-2.017 0-2.965-1.09-2.965-3.153V9.847c0-2.064.948-3.143 2.965-3.143h12.856c2.007 0 2.965 1.08 2.965 3.143v8.095c0 2.063-.958 3.153-2.965 3.153h-3.503c-.71 0-.949.17-1.278.857l-1.667 3.313Z${
             !filled &&
@@ -45,10 +45,8 @@ export const BubbleChat: IconProps<BubbleChatProps & FilledProp> = ({
   }
 
   return (
-    <Icon
-      className={className}
-      style={{ rotate: clsx({ '180deg': props.reverse }) }}>
-      {props.type === 'multiple' ? (
+    <Icon {...rest} style={{ rotate: clsx({ '180deg': rest.reverse }) }}>
+      {rest.type === 'multiple' ? (
         <>
           <path
             d={
@@ -71,14 +69,14 @@ export const BubbleChat: IconProps<BubbleChatProps & FilledProp> = ({
         <path d={getPathPosition()} fill='currentColor' />
       )}
 
-      {props.type === 'multiple' && props.withMark === 'exclamation' && (
+      {rest.type === 'multiple' && rest.withMark === 'exclamation' && (
         <path
           d='M20.3705 17.3955C20.7785 17.3955 20.9961 17.1671 21.0052 16.7467L21.114 13.7585C21.1322 13.3108 20.8148 13 20.3795 13C19.9443 13 19.6178 13.3199 19.636 13.7676L19.7448 16.7467C19.7629 17.1762 19.9806 17.3955 20.3705 17.3955ZM20.3795 20C20.842 20 21.25 19.6162 21.25 19.1501C21.25 18.6841 20.8511 18.3003 20.3795 18.3003C19.8989 18.3003 19.5 18.675 19.5 19.1501C19.5 19.6253 19.908 20 20.3795 20Z'
           fill={filled ? 'white' : 'black'}
         />
       )}
 
-      {props.type === 'multiple' && props.withMark === 'text' && (
+      {rest.type === 'multiple' && rest.withMark === 'text' && (
         <path
           d={
             filled

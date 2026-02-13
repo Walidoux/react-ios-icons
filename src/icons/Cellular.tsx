@@ -6,8 +6,8 @@ interface CellularProps {
 }
 
 /**
- * Cellular icon
- * @param {'noNetwork' | 'verySlow' | 'slow' | 'normal' | 'fast'} [props.network] - network description
+ * Cellular icon with 5 variants
+ * @param {CellularProps['network']} [props.network="fast"] - network description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Cellular.tsx
  */
 export const Cellular: IconProps<CellularProps> = ({

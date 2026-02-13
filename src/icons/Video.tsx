@@ -16,6 +16,7 @@ type VideoProps = FilledProp &
  * @param {VideoProps["squared"]} [squared] - Displays square around the video icon
  * @param {VideoProps["iconType"]} [iconType] - Icon type
  * @param {VideoProps["withBadge"]} [withBadge] - Badge type
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Video.tsx
  */
 export const Video: IconProps<VideoProps> = ({ filled = false, ...rest }) => {

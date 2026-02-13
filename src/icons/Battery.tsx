@@ -8,6 +8,7 @@ interface BatteryProps {
 /**
  * Battery icon
  * @param {BatteryProps["progression"]} [progression] - Shows battery's capacity from 0 to 100 with color support
+  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Battery.tsx
  */
 export const Battery: IconProps<BatteryProps> = ({
   progression = 100,

@@ -8,6 +8,7 @@ interface MessageProps extends FilledProp {
 /**
  * Message icon with 4 variants
  * @param {MessageProps["circled"]} [circled] - Shows a circle around the message icon
+ * @param {boolean} [filled] - filled description
  * @see https://github.com/Walidoux/react-ios-icons/blob/release/src/icons/Message.tsx
  */
 export const Message: IconProps<MessageProps> = ({
