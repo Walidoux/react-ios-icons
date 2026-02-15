@@ -5,7 +5,7 @@ import { Airpod } from '../../src'
 import { useNode } from './useNode'
 
 const IconConstraints: React.FC<PropsWithChildren> = ({ children }) => (
-  <div className='relative h-[200px] w-[200px] border border-red-600/20'>
+  <div className='relative h-50 w-50 border border-red-600/20'>
     <div className='pointer-events-none absolute top-0 right-0 left-0 h-1/4 bg-blue-500/10' />
     <div className='pointer-events-none absolute right-0 bottom-0 left-0 h-1/4 bg-blue-500/10' />
     {children}
@@ -141,10 +141,10 @@ export default () => {
       ref={containerRef}>
       <div className='flex flex-wrap gap-2'>
         <Button
-          variant="outline"
           disabled={!canUndo}
           onClick={undo}
-          title='Undo (Ctrl/Cmd+Z)'>
+          title='Undo (Ctrl/Cmd+Z)'
+          variant='outline'>
           Undo
         </Button>
         <Button

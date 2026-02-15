@@ -182,7 +182,7 @@ const auditAndFixIconFile = (
             if (hasValidSeeTag) {
               isSeeLinkValid = true
             } else {
-              const lastDoc = docs[docs.length - 1]
+              const lastDoc = docs.at(-1) as ts.JSDoc
               const end = lastDoc.getEnd()
               const insertionPoint = end - 2 // before */
               const seeTag = ` * @see ${docLink}\n `
@@ -196,6 +196,7 @@ const auditAndFixIconFile = (
 
             // Check for undocumented props
             const paramTags = docs
+              // @ts-expect-error
               .flatMap((d) => d.tags ?? [])
               .filter((t) => t.tagName.escapedText === 'param')
             const documentedParams = paramTags.map((t) =>
@@ -213,14 +214,16 @@ const auditAndFixIconFile = (
               const jsdocNode = docs[0] // Assuming docs[0] is the main JSDoc block
 
               // Extract existing comment lines
-              const existingCommentText = jsdocNode.comment ?? ''
+              const existingCommentText = (jsdocNode?.comment ?? '') as string
               const existingCommentLines = existingCommentText
                 ? existingCommentText.split('\n')
                 : []
               const existingParamTags = docs
+                // @ts-expect-error
                 .flatMap((d) => d.tags ?? [])
                 .filter((t) => t.tagName.escapedText === 'param')
               const existingSeeTag = docs
+                // @ts-expect-error
                 .flatMap((d) => d.tags ?? [])
                 .find((t) => t.tagName.escapedText === 'see')
 
@@ -233,7 +236,7 @@ const auditAndFixIconFile = (
                 ).parameters
                 const paramBinding =
                   funcParams.length > 0 &&
-                  funcParams[0].name &&
+                  funcParams[0]?.name &&
                   ts.isObjectBindingPattern(funcParams[0].name)
                     ? funcParams[0].name
                     : undefined
@@ -244,8 +247,10 @@ const auditAndFixIconFile = (
                     (el) => el.name.getText() === propName
                   )
                   if (element) {
+                    // @ts-expect-error
                     if (element.type) {
                       // If type is explicitly defined like { prop: string }
+                      // @ts-expect-error
                       inferredType = element.type.getText()
                     } else if (element.initializer) {
                       // If there's a default value
@@ -271,9 +276,9 @@ const auditAndFixIconFile = (
               const newJSDocLines: string[] = ['/**']
 
               // Add existing main comment lines
-              existingCommentLines.forEach((line) =>
+              for (const line of existingCommentLines) {
                 newJSDocLines.push(` * ${line}`)
-              )
+              }
 
               // Add a blank line if there's existing comment content and other tags/params will follow
               if (
@@ -286,10 +291,12 @@ const auditAndFixIconFile = (
               }
 
               // Add all param tags (existing and new)
-              existingParamTags.forEach((tag) =>
+              for (const tag of existingParamTags) {
                 newJSDocLines.push(` * ${tag.getText(sourceFile)}`)
-              )
-              newParamTagLines.forEach((line) => newJSDocLines.push(line))
+              }
+              for (const line of newParamTagLines) {
+                newJSDocLines.push(line)
+              }
 
               // Add @see tag if it exists
               if (existingSeeTag) {
@@ -309,9 +316,9 @@ const auditAndFixIconFile = (
 
               // Replace the old JSDoc block in modifiedCode with the new JSDoc block
               modifiedCode =
-                modifiedCode.substring(0, jsdocNode.pos) +
+                modifiedCode.substring(0, jsdocNode?.pos) +
                 newJSDocContent +
-                modifiedCode.substring(jsdocNode.end)
+                modifiedCode.substring(jsdocNode?.end as number)
             }
           } else if (componentName != null) {
             const jsDoc = generateJSDoc(

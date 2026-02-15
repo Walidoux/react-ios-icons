@@ -1,6 +1,6 @@
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react'
-import * as React from 'react'
+import { useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   InputGroup,
@@ -267,7 +267,7 @@ function ComboboxChipsInput({
 }
 
 function useComboboxAnchor() {
-  return React.useRef<HTMLDivElement | null>(null)
+  return useRef<HTMLDivElement | null>(null)
 }
 
 export {
