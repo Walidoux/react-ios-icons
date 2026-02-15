@@ -1,5 +1,12 @@
 # 🐢 Getting started
 
+
+<p align="center">
+  <a href="https://github.com/walidkorchi/react-ios-icons/releases"><img src="https://img.shields.io/github/v/release/walidkorchi/react-ios-icons?label=Latest%20release&style=for-the-badge" alt="Latest release"></a>
+  <a href="https://www.npmjs.com/package/react-ios-icons"><img src="https://img.shields.io/bundlephobia/minzip/%40walidkorchi/react-ios-icons/1.1.1?style=for-the-badge" alt="Bundle Size"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
+</p>
+
 ![Preview background library](https://repository-images.githubusercontent.com/682106596/d365cb8c-1ca1-442d-a959-be2b5126e931)
 
 ## ✨ Features

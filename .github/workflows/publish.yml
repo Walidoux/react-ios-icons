@@ -1,0 +1,164 @@
+name: Publish Docs
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [release]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  build-and-push:
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out repository 🛎️
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.5
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /home/walid/walidkorchi-portfolio || mkdir -p /home/walid/walidkorchi-portfolio && cd /home/walid/walidkorchi-portfolio
+
+            if [ ! -f docker-compose.yml ] || ! cmp -s <(echo '${{ github.sha }}') <(git log -1 --format=%H 2>/dev/null || echo ""); then
+              echo "Updating docker-compose.yml"
+              cat > docker-compose.yml << 'EOF'
+            services:
+              walidkorchi-portfolio:
+                image: ghcr.io/${{ github.repository }}:latest
+                container_name: walidkorchi-portfolio
+                restart: unless-stopped
+                ports:
+                  - "3000:3000"
+                environment:
+                  - NODE_ENV=production
+                  - PORT=3000
+                  - HOST=0.0.0.0
+                  - SERVER_BASE_URL=https://walidkorchi.com
+                healthcheck:
+                  test: ["CMD", "curl", "-f", "http://localhost:3000"]
+                  interval: 30s
+                  timeout: 10s
+                  retries: 3
+                  start_period: 40s
+                networks:
+                  - traefik_web
+                labels:
+                  traefik.enable: "true"
+                  traefik.http.routers.walidkorchi.rule: "Host(`walidkorchi.com`)"
+                  traefik.http.routers.walidkorchi.entrypoints: "websecure"
+                  traefik.http.routers.walidkorchi.tls: "true"
+                  traefik.http.services.walidkorchi.loadbalancer.server.port: "3000"
+
+            networks:
+              traefik_web:
+                external: true
+            EOF
+            fi
+
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+            echo "Pulling latest image..."
+            docker pull ghcr.io/${{ github.repository }}:latest
+
+            echo "Stopping existing containers..."
+            docker compose down
+
+            echo "Starting new containers..."
+            docker compose up -d
+
+            echo "Container logs:"
+            docker compose logs --tail=50 walidkorchi-portfolio
+
+            echo "Waiting for health check..."
+            sleep 30
+
+            echo "Checking container status..."
+            docker ps
+
+            echo "Checking application health..."
+            if curl -f http://localhost:3000 > /dev/null 2>&1; then
+              echo "✅ Deployment successful!"
+            else
+              echo "❌ Health check failed, but container is running"
+              exit 1
+            fi
