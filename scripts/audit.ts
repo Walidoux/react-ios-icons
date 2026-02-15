@@ -106,7 +106,10 @@ const getComponentName = (sourceFile: ts.SourceFile): string | null => {
  * @returns {AuditResults} Audit results and modified code if changes were made
  */
 
-const auditAndFixIconFile = (filePath: string, shouldFix: boolean): AuditResults => {
+const auditAndFixIconFile = (
+  filePath: string,
+  shouldFix: boolean
+): AuditResults => {
   const code = fs.readFileSync(filePath, 'utf8')
   const sourceFile = ts.createSourceFile(
     filePath,
@@ -150,16 +153,20 @@ const auditAndFixIconFile = (filePath: string, shouldFix: boolean): AuditResults
           // Extract prop names from destructuring in parameters
           if (declaration.initializer.parameters.length > 0) {
             const param = declaration.initializer.parameters[0]
-            if (param && ts.isParameter(param) && param.name && ts.isObjectBindingPattern(param.name)) {
-                for (const element of param.name.elements) {
-                    propNames.push(element.name.getText())
-                }
+            if (
+              param &&
+              ts.isParameter(param) &&
+              param.name &&
+              ts.isObjectBindingPattern(param.name)
+            ) {
+              for (const element of param.name.elements) {
+                propNames.push(element.name.getText())
+              }
             }
           }
 
-
           if (docs?.length > 0) {
-            hasJSDocBlock = true;
+            hasJSDocBlock = true
             const jsdocText = docs.map((j) => j.getText()).join('\n')
             let hasValidSeeTag = false
             if (REGEX.JSDOC.REF.test(jsdocText)) {
@@ -172,94 +179,140 @@ const auditAndFixIconFile = (filePath: string, shouldFix: boolean): AuditResults
               }
             }
 
-            if(hasValidSeeTag) {
-                isSeeLinkValid = true
+            if (hasValidSeeTag) {
+              isSeeLinkValid = true
             } else {
-                const lastDoc = docs[docs.length - 1]
-                const end = lastDoc.getEnd()
-                const insertionPoint = end - 2 // before */
-                const seeTag = ` * @see ${docLink}\n `
-                modifiedCode = modifiedCode.slice(0, insertionPoint) + seeTag + modifiedCode.slice(insertionPoint)
-                isSeeLinkValid = true
-                changesMade = true
+              const lastDoc = docs[docs.length - 1]
+              const end = lastDoc.getEnd()
+              const insertionPoint = end - 2 // before */
+              const seeTag = ` * @see ${docLink}\n `
+              modifiedCode =
+                modifiedCode.slice(0, insertionPoint) +
+                seeTag +
+                modifiedCode.slice(insertionPoint)
+              isSeeLinkValid = true
+              changesMade = true
             }
 
             // Check for undocumented props
-            const paramTags = docs.flatMap(d => d.tags ?? []).filter(t => t.tagName.escapedText === 'param')
-            const documentedParams = paramTags.map(t => (t as ts.JSDocParameterTag).name.getText())
-            const undocumentedProps = propNames.filter(p => p !== 'rest' && !documentedParams.some(dp => dp.endsWith(p)))
+            const paramTags = docs
+              .flatMap((d) => d.tags ?? [])
+              .filter((t) => t.tagName.escapedText === 'param')
+            const documentedParams = paramTags.map((t) =>
+              (t as ts.JSDocParameterTag).name.getText()
+            )
+            const undocumentedProps = propNames.filter(
+              (p) =>
+                p !== 'rest' && !documentedParams.some((dp) => dp.endsWith(p))
+            )
 
-            if(undocumentedProps.length > 0) {
+            if (undocumentedProps.length > 0) {
               arePropsDocumented = false // Set to false because not all are documented
               changesMade = true // Mark that changes were made
 
-              const jsdocNode = docs[0]; // Assuming docs[0] is the main JSDoc block
+              const jsdocNode = docs[0] // Assuming docs[0] is the main JSDoc block
 
               // Extract existing comment lines
-              const existingCommentText = jsdocNode.comment ?? '';
-              const existingCommentLines = existingCommentText ? existingCommentText.split('\n') : [];
-              const existingParamTags = docs.flatMap(d => d.tags ?? []).filter(t => t.tagName.escapedText === 'param');
-              const existingSeeTag = docs.flatMap(d => d.tags ?? []).find(t => t.tagName.escapedText === 'see');
+              const existingCommentText = jsdocNode.comment ?? ''
+              const existingCommentLines = existingCommentText
+                ? existingCommentText.split('\n')
+                : []
+              const existingParamTags = docs
+                .flatMap((d) => d.tags ?? [])
+                .filter((t) => t.tagName.escapedText === 'param')
+              const existingSeeTag = docs
+                .flatMap((d) => d.tags ?? [])
+                .find((t) => t.tagName.escapedText === 'see')
 
-              // Generate new param tags for undocumented props
-              const newParamTagLines = undocumentedProps.map(propName => {
-                const funcParams = (declaration.initializer as ts.ArrowFunction | ts.FunctionExpression).parameters;
-                const paramBinding = funcParams.length > 0 && funcParams[0].name && ts.isObjectBindingPattern(funcParams[0].name)
+              // generate new param tags for undocumented props
+              const newParamTagLines = undocumentedProps.map((propName) => {
+                const funcParams = (
+                  declaration.initializer as
+                    | ts.ArrowFunction
+                    | ts.FunctionExpression
+                ).parameters
+                const paramBinding =
+                  funcParams.length > 0 &&
+                  funcParams[0].name &&
+                  ts.isObjectBindingPattern(funcParams[0].name)
                     ? funcParams[0].name
-                    : undefined;
+                    : undefined
 
-                let inferredType = 'any';
+                let inferredType = 'any'
                 if (paramBinding) {
-                    const element = paramBinding.elements.find(el => el.name.getText() === propName);
-                    if (element) {
-                        if (element.type) { // If type is explicitly defined like { prop: string }
-                            inferredType = element.type.getText();
-                        } else if (element.initializer) { // If there's a default value
-                            if (ts.isStringLiteral(element.initializer)) {
-                                inferredType = 'string';
-                            } else if (ts.isNumericLiteral(element.initializer)) {
-                                inferredType = 'number';
-                            } else if (element.initializer.kind === ts.SyntaxKind.TrueKeyword || element.initializer.kind === ts.SyntaxKind.FalseKeyword) {
-                                inferredType = 'boolean';
-                            }
-                            // Add more literal types as needed
-                        }
+                  const element = paramBinding.elements.find(
+                    (el) => el.name.getText() === propName
+                  )
+                  if (element) {
+                    if (element.type) {
+                      // If type is explicitly defined like { prop: string }
+                      inferredType = element.type.getText()
+                    } else if (element.initializer) {
+                      // If there's a default value
+                      if (ts.isStringLiteral(element.initializer)) {
+                        inferredType = 'string'
+                      } else if (ts.isNumericLiteral(element.initializer)) {
+                        inferredType = 'number'
+                      } else if (
+                        element.initializer.kind ===
+                          ts.SyntaxKind.TrueKeyword ||
+                        element.initializer.kind === ts.SyntaxKind.FalseKeyword
+                      ) {
+                        inferredType = 'boolean'
+                      }
+                      // Add more literal types as needed
                     }
+                  }
                 }
-                return ` * @param {${inferredType}} [${propName}] - ${propName} description`;
-              });
+                return ` * @param {${inferredType}} [${propName}] - ${propName} description`
+              })
 
               // Reconstruct the JSDoc block
-              const newJSDocLines: string[] = ['/**'];
+              const newJSDocLines: string[] = ['/**']
 
               // Add existing main comment lines
-              existingCommentLines.forEach(line => newJSDocLines.push(` * ${line}`));
+              existingCommentLines.forEach((line) =>
+                newJSDocLines.push(` * ${line}`)
+              )
 
               // Add a blank line if there's existing comment content and other tags/params will follow
-              if (existingCommentLines.length > 0 && (existingParamTags.length > 0 || newParamTagLines.length > 0 || existingSeeTag)) {
-                newJSDocLines.push(' *');
+              if (
+                existingCommentLines.length > 0 &&
+                (existingParamTags.length > 0 ||
+                  newParamTagLines.length > 0 ||
+                  existingSeeTag)
+              ) {
+                newJSDocLines.push(' *')
               }
 
               // Add all param tags (existing and new)
-              existingParamTags.forEach(tag => newJSDocLines.push(` * ${tag.getText(sourceFile)}`));
-              newParamTagLines.forEach(line => newJSDocLines.push(line));
+              existingParamTags.forEach((tag) =>
+                newJSDocLines.push(` * ${tag.getText(sourceFile)}`)
+              )
+              newParamTagLines.forEach((line) => newJSDocLines.push(line))
 
               // Add @see tag if it exists
               if (existingSeeTag) {
                 // Add a blank line before @see if there are param tags above it
-                if ((existingParamTags.length > 0 || newParamTagLines.length > 0) && existingSeeTag) {
-                  newJSDocLines.push(' *');
+                if (
+                  (existingParamTags.length > 0 ||
+                    newParamTagLines.length > 0) &&
+                  existingSeeTag
+                ) {
+                  newJSDocLines.push(' *')
                 }
-                newJSDocLines.push(` * ${existingSeeTag.getText(sourceFile)}`);
+                newJSDocLines.push(` * ${existingSeeTag.getText(sourceFile)}`)
               }
 
-              newJSDocLines.push(' */');
-              const newJSDocContent = newJSDocLines.join('\n');
+              newJSDocLines.push(' */')
+              const newJSDocContent = newJSDocLines.join('\n')
 
               // Replace the old JSDoc block in modifiedCode with the new JSDoc block
-              modifiedCode = modifiedCode.substring(0, jsdocNode.pos) + newJSDocContent + modifiedCode.substring(jsdocNode.end);
+              modifiedCode =
+                modifiedCode.substring(0, jsdocNode.pos) +
+                newJSDocContent +
+                modifiedCode.substring(jsdocNode.end)
             }
-
           } else if (componentName != null) {
             const jsDoc = generateJSDoc(
               componentName,
@@ -302,23 +355,31 @@ const auditAndFixIconFile = (filePath: string, shouldFix: boolean): AuditResults
   return { hasJSDocBlock, isSeeLinkValid, arePropsDocumented, changesMade }
 }
 
-const shouldFix = process.argv.includes('--fix');
+const shouldFix = process.argv.includes('--fix')
 
 for (const icon of fs.readdirSync(ICONS_DIR)) {
   const result = auditAndFixIconFile(path.join(ICONS_DIR, icon), shouldFix)
 
-  const jsDocBlock = result.hasJSDocBlock ? chalk.green('✓ JSDocBlock') : chalk.redBright('✗ JSDocBlock');
-  const seeLinkValid = result.isSeeLinkValid ? chalk.green('✓ SeeLinkValid') : chalk.redBright('✗ SeeLinkValid');
-  const propsDocumented = result.arePropsDocumented ? chalk.green('✓ PropsDocumented') : chalk.redBright('✗ PropsDocumented');
+  const jsDocBlock = result.hasJSDocBlock
+    ? chalk.green('✓ JSDocBlock')
+    : chalk.redBright('✗ JSDocBlock')
+  const seeLinkValid = result.isSeeLinkValid
+    ? chalk.green('✓ SeeLinkValid')
+    : chalk.redBright('✗ SeeLinkValid')
+  const propsDocumented = result.arePropsDocumented
+    ? chalk.green('✓ PropsDocumented')
+    : chalk.redBright('✗ PropsDocumented')
 
   const status =
-    (result.hasJSDocBlock && result.isSeeLinkValid && result.arePropsDocumented)
+    result.hasJSDocBlock && result.isSeeLinkValid && result.arePropsDocumented
       ? chalk.bgGreenBright.black('  CORRECT  ')
       : result.changesMade
-        ? (shouldFix
-            ? chalk.bgGreen.black('   FIXED   ')
-            : chalk.bgYellow.black('  FIXABLE  '))
-        : chalk.bgRedBright.black(' INCORRECT ');
+        ? shouldFix
+          ? chalk.bgGreen.black('   FIXED   ')
+          : chalk.bgYellow.black('  FIXABLE  ')
+        : chalk.bgRedBright.black(' INCORRECT ')
 
-  console.log(`${chalk.cyan(icon.padEnd(24))} ${status} ${jsDocBlock} ${seeLinkValid} ${propsDocumented}`)
+  console.log(
+    `${chalk.cyan(icon.padEnd(24))} ${status} ${jsDocBlock} ${seeLinkValid} ${propsDocumented}`
+  )
 }
