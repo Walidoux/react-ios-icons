@@ -1,11 +1,12 @@
+import './theme.css'
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import './index.css'
-import App from './App.tsx'
+import Docs from './Docs.tsx'
 
 createRoot(document.getElementById('root') as HTMLHtmlElement).render(
   <StrictMode>
-    <App />
+    <Docs />
   </StrictMode>
 )

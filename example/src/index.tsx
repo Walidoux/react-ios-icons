@@ -1,9 +1,11 @@
+import './main.css'
+
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 
 import Example from './Example'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+createRoot(document.getElementById('root') as HTMLHtmlElement).render(
   <StrictMode>
     <Example />
   </StrictMode>

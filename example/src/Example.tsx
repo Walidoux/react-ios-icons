@@ -1,6 +1,6 @@
+import { Button } from '@docs-ui/button'
 import { type PropsWithChildren, useEffect, useRef, useState } from 'react'
 import { optimize } from 'svgo'
-
 import { Airpod } from '../../src'
 import { useNode } from './useNode'
 
@@ -140,19 +140,14 @@ export default () => {
       className='flex min-h-screen w-screen flex-col items-center justify-center gap-4'
       ref={containerRef}>
       <div className='flex flex-wrap gap-2'>
-        <button
-          className={`rounded border border-gray-400 px-4 py-2 ${
-            canUndo
-              ? 'bg-gray-200 hover:bg-gray-300'
-              : 'cursor-not-allowed bg-gray-100 text-gray-400'
-          }`}
+        <Button
+          variant="outline"
           disabled={!canUndo}
           onClick={undo}
-          title='Undo (Ctrl/Cmd+Z)'
-          type='button'>
+          title='Undo (Ctrl/Cmd+Z)'>
           Undo
-        </button>
-        <button
+        </Button>
+        <Button
           className={`rounded border border-gray-400 px-4 py-2 ${
             canRedo
               ? 'bg-gray-200 hover:bg-gray-300'
@@ -160,22 +155,19 @@ export default () => {
           }`}
           disabled={!canRedo}
           onClick={redo}
-          title='Redo (Ctrl/Cmd+Y or Ctrl/Cmd+Shift+Z)'
-          type='button'>
+          title='Redo (Ctrl/Cmd+Y or Ctrl/Cmd+Shift+Z)'>
           Redo
-        </button>
-        <button
+        </Button>
+        <Button
           className='rounded border border-gray-400 bg-gray-200 px-4 py-2 hover:bg-gray-300'
-          onClick={handleReset}
-          type='button'>
+          onClick={handleReset}>
           Reset Path Positions
-        </button>
-        <button
+        </Button>
+        <Button
           className='rounded border border-gray-400 bg-gray-200 px-4 py-2 hover:bg-gray-300'
-          onClick={handleOptimize}
-          type='button'>
+          onClick={handleOptimize}>
           Optimize
-        </button>
+        </Button>
       </div>
       {sizeInfo && (
         <div className='mb-4 text-green-600 text-sm'>{sizeInfo}</div>
