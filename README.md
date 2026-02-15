@@ -1,20 +1,23 @@
 # 🐢 Getting started
 
-
-<p align="center">
-  <a href="https://github.com/walidkorchi/react-ios-icons/releases"><img src="https://img.shields.io/github/v/release/walidkorchi/react-ios-icons?label=Latest%20release&style=for-the-badge" alt="Latest release"></a>
-  <a href="https://www.npmjs.com/package/react-ios-icons"><img src="https://img.shields.io/bundlephobia/minzip/%40walidkorchi/react-ios-icons/1.1.1?style=for-the-badge" alt="Bundle Size"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
-</p>
+<a href="https://github.com/walidkorchi/react-ios-icons/releases"><img src="https://img.shields.io/github/v/release/walidkorchi/react-ios-icons?label=Latest%20release&style=for-the-badge" alt="Latest release"></a>
+<a href="https://www.npmjs.com/package/react-ios-icons"><img src="https://img.shields.io/bundlephobia/minzip/%40walidkorchi/react-ios-icons/1.1.1?style=for-the-badge" alt="Bundle Size"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
 
 ![Preview background library](https://repository-images.githubusercontent.com/682106596/d365cb8c-1ca1-442d-a959-be2b5126e931)
+
+> [!IMPORTANT]
+>
+> This icon library is currently in active development, we therefore advise you to either:
+> - Wait for a more stable version until further notice to use it in your projects, because many things may change
+> - Contribute to the project by opening an issue or a pull request.
 
 ## ✨ Features
 
 - 📥 Supports around <!-- ICON_COUNT -->206 out of 6,900 SF icons
-- ✏️ **Editor Mode** — Dynamically changes position of path icons
+- ✏️ **Editor Mode** — Dynamically changes position of path icons, with undo/redo actions, and with gzip compression
 
-Does not require SF Pro Display font
+Does not require SF Pro Display font, only svg paths
 
 ## 🚀 Quick Start
 
@@ -51,11 +54,11 @@ You will be prompted with a few questions to help generate starter code for your
 - [ ] docs : add themed doc with basic search bar
 - [ ] docs : infer icon count variants from tsx files
 - [ ] example : draw symetrical alignements lines for x/y axis inside contraints
-- [ ] example : add undo/redo actions when manipulating svgs
 
 <details>
-    <summary>✅ Completed roadmap</summary>
+    <summary>✅ Completed roadmap (from latest to oldest)</summary>
 
+- [x] example : add undo/redo actions when manipulating svgs
 - [x] example : add path optimization for svgs
 - [x] code (linter/formatter) : migrate eslint/prettier to biomejs/ultracite toolchain
 - [x] example : add editor mode to dynamically adjust path attribute value
